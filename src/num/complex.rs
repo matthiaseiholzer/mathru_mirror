@@ -304,6 +304,43 @@ impl<T> Lapack for Complex<T> where T: Real
     {
         unimplemented!();
     }
+
+    fn xggev(
+        n: i32,
+        a: &mut [Self],
+        lda: i32,
+        b: &mut [Self],
+        ldb: i32,
+        alphar: &mut [Self],
+        alphai: &mut [Self],
+        beta: &mut [Self],
+        vl: &mut [Self],
+        ldvl: i32,
+        vr: &mut [Self],
+        ldvr: i32,
+        work: &mut [Self],
+        lwork: i32,
+        info: &mut i32)
+    {
+        unimplemented!();
+    }
+
+    fn xggev_work_size(n: i32,
+                       a: &mut [Self],
+                       lda: i32,
+                       b: &mut [Self],
+                       ldb: i32,
+                       alphar: &mut [Self],
+                       alphai: &mut [Self],
+                       beta: &mut [Self],
+                       vl: &mut [Self],
+                       ldvl: i32,
+                       vr: &mut [Self],
+                       ldvr: i32,
+                       info: &mut i32 ) -> i32
+    {
+        unimplemented!();
+    }
 }
 
 #[cfg(feature = "blaslapack")]

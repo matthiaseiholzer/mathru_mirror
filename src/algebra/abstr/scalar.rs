@@ -10,26 +10,24 @@ use crate::algebra::abstr::Zero;
 /// comparisons, basic numeric operations, and string conversion.
 #[cfg(feature = "native")]
 pub trait Scalar<Rhs = Self, Output = Self>:
-    Sized + Display + ToPrimitive + FromPrimitive + NumCast + Debug + Copy + PartialOrd + Sign
-{
-}
+Sized + Display + ToPrimitive + FromPrimitive + NumCast + Debug + Copy + PartialOrd + Sign
+{}
 
 /// comparisons, basic numeric operations, and string conversion.
 #[cfg(feature = "blaslapack")]
 pub trait Scalar<Rhs = Self, Output = Self>:
-    Sized
-    + Display
-    + ToPrimitive
-    + FromPrimitive
-    + NumCast
-    + Debug
-    + Copy
-    + PartialOrd
-    + Sign
-    + Blas
-    + Lapack
-{
-}
+Sized
++ Display
++ ToPrimitive
++ FromPrimitive
++ NumCast
++ Debug
++ Copy
++ PartialOrd
++ Sign
++ Blas
++ Lapack
+{}
 
 macro_rules! impl_scalar {
     ($t:ty, $eps:expr) => {
@@ -172,6 +170,37 @@ pub trait Lapack: Sized + Zero
               b: &mut [Self],
               ldb: i32,
               info: &mut i32);
+
+    fn xggev(
+            n: i32,
+            a: &mut [Self],
+            lda: i32,
+            b: &mut [Self],
+            ldb: i32,
+            alphar: &mut [Self],
+            alphai: &mut [Self],
+            beta: &mut [Self],
+            vl: &mut [Self],
+            ldvl: i32,
+            vr: &mut [Self],
+            ldvr: i32,
+            work: &mut [Self],
+            lwork: i32,
+            info: &mut i32);
+
+    fn xggev_work_size(n: i32,
+                        a: &mut [Self],
+                        lda: i32,
+                        b: &mut [Self],
+                        ldb: i32,
+                        alphar: &mut [Self],
+                        alphai: &mut [Self],
+                        beta: &mut [Self],
+                        vl: &mut [Self],
+                        ldvl: i32,
+                        vr: &mut [Self],
+                        ldvr: i32,
+                        info: &mut i32 ) -> i32;
 }
 
 #[cfg(feature = "blaslapack")]
@@ -203,7 +232,7 @@ pub trait Blas: Sized + Zero
              b: &mut [Self],
              ldb: i32);
 
-    fn xscal(n: i32, a: Self, x: &mut [Self], inc: i32 );
+    fn xscal(n: i32, a: Self, x: &mut [Self], inc: i32);
 
     fn xaxpy(n: i32, a: Self, x: &[Self], incx: i32, y: &mut [Self], incy: i32);
 }

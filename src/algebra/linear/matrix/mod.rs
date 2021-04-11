@@ -11,6 +11,9 @@ mod matrixcolumnintoiterator;
 mod matrixrowintoiterator;
 mod eigen;
 pub use self::eigen::EigenDec;
+mod gen_eigen;
+pub use self::gen_eigen::GenEigenDec;
+
 
 mod hessenberg;
 pub use self::hessenberg::HessenbergDec;
@@ -48,5 +51,4 @@ pub use self::{
     matrixrowintoiterator::MatrixRowIntoIterator,
     solve::Solve,
     substitute::Substitute, transpose::Transpose
-
 };

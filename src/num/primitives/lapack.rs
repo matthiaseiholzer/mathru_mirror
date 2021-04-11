@@ -4,7 +4,7 @@ use lapack;
 
 macro_rules! lapack_impl(
     ($T: ty, $xgehrd: path, $xorghr: path, $xgeev: path, $xgetrf: path, $xgeqrf: path, $xorgqr: path, $xgetri: path, $xpotrf: path,
-    $xgetrs: path)
+    $xgetrs: path, $xggev: path)
     => (
         impl Lapack for $T
        	{
@@ -134,7 +134,23 @@ macro_rules! lapack_impl(
 				}
 			}
 
+			// generalized eigenvalue
+			fn xggev(n: i32, a: &mut [Self], lda: i32, b: &mut [Self], ldb: i32, alphar: &mut [Self], alphai: &mut [Self], beta: &mut [Self], vl: &mut [Self], ldvl: i32, vr: &mut [Self], ldvr: i32, work: &mut [Self], lwork: i32, info: &mut i32 )
+			{
+				unsafe
+				{
+					{ $xggev('V' as u8, 'V' as u8, n, a, lda, b, ldb, alphar, alphai, beta, vl, ldvl, vr, ldvr, work, lwork, info) };
+				}
+			}
 
+			fn xggev_work_size(n: i32, a: &mut [Self], lda: i32, b: &mut [Self], ldb: i32, alphar: &mut [Self], alphai: &mut [Self], beta: &mut [Self], vl: &mut [Self], ldvl: i32, vr: &mut [Self], ldvr: i32, info: &mut i32 ) -> i32
+			{
+				let mut work = [ <$T>::zero() ];
+                let lwork = -1 as i32;
+				unsafe { $xggev('V' as u8, 'V' as u8, n, a, lda, b, ldb, alphar, alphai, beta, vl, ldvl, vr, ldvr, &mut work, lwork, info) };
+
+				work[0] as i32
+			}
       	}
     )
 );
@@ -193,7 +209,8 @@ lapack_impl!(f32,
              lapack::sorgqr,
              lapack::sgetri,
              lapack::spotrf,
-             lapack::sgetrs);
+             lapack::sgetrs,
+             lapack::sggev);
 
 lapack_impl!(f64,
              lapack::dgehrd,
@@ -204,7 +221,8 @@ lapack_impl!(f64,
              lapack::dorgqr,
              lapack::dgetri,
              lapack::dpotrf,
-             lapack::dgetrs);
+             lapack::dgetrs,
+             lapack::dggev);
 
 blas_impl!(f32, blas::sgemm, blas::strsm, blas::sscal, blas::saxpy);
 
