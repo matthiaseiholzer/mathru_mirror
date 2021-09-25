@@ -1,6 +1,9 @@
 use crate::analysis::integral::newton_cotes::ClosedFixedIntervalIterator;
 use crate::algebra::abstr::Real;
 
+#[cfg(feature = "serde")]
+use serde::{Deserialize, Serialize};
+
 /// Closed Newton-Cotes
 ///
 /// <https://en.wikipedia.org/wiki/Newton-Cotes_formulas>

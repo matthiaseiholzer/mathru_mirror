@@ -1,12 +1,17 @@
 use crate::algebra::abstr::Real;
 use crate::analysis::integral::gauss_legendre::root_weight::RootWeight;
 
+#[cfg(feature = "serde")]
+use serde::{Deserialize, Serialize};
+
 ///
 /// ```math
 /// \int_{a}^{b}f(x)\,dx = \frac{b - a}{2}\sum_{i=1}^{n}f(\frac{b - a}{2}x_i + \frac{a + b}{2})a_i
 /// ```
 ///
 /// <https://en.wikipedia.org/wiki/Gaussian_quadrature#Gauss-Legendre_quadrature>
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[derive(Clone, Debug)]
 pub struct GaussLegendre<T>
 {
     root_weight: RootWeight<T>
@@ -46,7 +51,6 @@ impl<T> GaussLegendre<T>
         {
             panic!("n is not within the limits");
         }
-
 
         return GaussLegendre{
             root_weight: RootWeight::new(n)

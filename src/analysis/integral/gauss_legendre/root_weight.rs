@@ -1,8 +1,11 @@
 use crate::algebra::abstr::Real;
 use std::vec::Vec;
 
+#[cfg(feature = "serde")]
+use serde::{Deserialize, Serialize};
+
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-#[derive(Clone)]
+#[derive(Clone, Debug)]
 pub struct RootWeight<T>
 {
     roots: Vec<T>,
@@ -10,7 +13,6 @@ pub struct RootWeight<T>
     n: i8,
     i: i8,
     k: i8,
-    idx: fn(&Self) -> usize
 }
 
 impl<T> RootWeight<T>
@@ -47,13 +49,13 @@ impl<T> RootWeight<T>
             _ => panic!("")
         };
 
-        let (k, f): (i8, fn(&Self) -> usize) = if n % 2 == 0
+        let k: i8 = if n % 2 == 0
         {
-            (n as i8 / 2, RootWeight::idx_n_even)
+            n as i8 / 2
         }
         else
         {
-            (n as i8 / 2 + 1, RootWeight::idx_n_odd)
+            n as i8 / 2 + 1
         };
 
         RootWeight
@@ -62,8 +64,7 @@ impl<T> RootWeight<T>
             weights,
             n: n as i8,
             i: 1,
-            k,
-            idx: f
+            k
         }
     }
 
@@ -90,12 +91,22 @@ impl<T> Iterator for RootWeight<T>
 {
     type Item = (T, T);
 
+
     fn next(&mut self) -> Option<Self::Item>
     {
+        let f_idx = if self.n % 2 == 0
+        {
+            RootWeight::idx_n_even
+        }
+        else
+        {
+            RootWeight::idx_n_odd
+        };
+
         if self.i <= self.n
         {
 
-            let idx = (self.idx)(self);
+            let idx = f_idx(self);
             let root = self.roots[idx];
             let weight = self.weights[idx];
             let pair = if self.i <= self.k

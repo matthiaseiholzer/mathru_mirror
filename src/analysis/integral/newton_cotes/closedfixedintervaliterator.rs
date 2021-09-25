@@ -1,5 +1,10 @@
 use crate::algebra::abstr::Real;
 
+#[cfg(feature = "serde")]
+use serde::{Deserialize, Serialize};
+
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[derive(Clone, Debug)]
 pub struct ClosedFixedIntervalIterator<T>
     where T: Real
 {
