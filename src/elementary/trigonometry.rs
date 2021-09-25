@@ -6,8 +6,7 @@ use crate::elementary::power::Power;
 
 /// Trigonometric functions
 ///
-///<a href="https://en.wikipedia.org/wiki/Trigonometric_functions">https://en.wikipedia
-/// .org/wiki/Trigonometric_functions</a>
+///<https://en.wikipedia.org/wiki/Trigonometric_functions>
 pub trait Trigonometry
 {
     /// Returns the mathematics constant PI

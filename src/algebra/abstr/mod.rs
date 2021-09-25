@@ -1,6 +1,6 @@
 //! Abstract algebra
 //!
-//! <a href="https://en.wikipedia.org/wiki/Abstract_algebra">https://en.wikipedia.org/wiki/Abstract_algebra</a>
+//! <https://en.wikipedia.org/wiki/Abstract_algebra>
 
 pub use self::{
     abeliangroup::{AbelianGroup, AbelianGroupAdd, AbelianGroupMul},

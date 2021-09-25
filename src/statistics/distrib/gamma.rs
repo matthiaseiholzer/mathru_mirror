@@ -7,7 +7,8 @@ use std::clone::Clone;
 /// Gamma distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Gamma_distribution">https://en.wikipedia.org/wiki/Gamma_distribution</a>
+/// <https://en.wikipedia.org/wiki/Gamma_distribution>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct Gamma<T>

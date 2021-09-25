@@ -2,7 +2,7 @@
 
 /// Natural number
 ///
-///<a href="https://en.wikipedia.org/wiki/Natural_number">https://en.wikipedia.org/wiki/Natural_number</a>
+///<https://en.wikipedia.org/wiki/Natural_number>
 pub trait Natural: Eq
 {
 }

@@ -16,7 +16,8 @@ use std::clone::Clone;
 
 /// Solves an ODE using backward Euler
 ///
-/// <a href="https://en.wikipedia.org/wiki/Backward_Euler_method">https://en.wikipedia.org/wiki/Backward_Euler_method</a>
+/// <https://en.wikipedia.org/wiki/Backward_Euler_method>
+///
 /// # Example
 ///
 /// For this example, we want to solve the following stiff ordinary

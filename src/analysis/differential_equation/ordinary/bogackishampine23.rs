@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 
 /// Solves an ODE using the Bogacki Shampine algorithm of 2nd order.
 ///
-///<a href="https://en.wikipedia.org/wiki/Bogacki-Shampine_method">https://en.wikipedia.org/wiki/Bogacki-Shampine_method</a>
+///<https://en.wikipedia.org/wiki/Bogacki-Shampine_method>
 ///
 /// # Example
 ///

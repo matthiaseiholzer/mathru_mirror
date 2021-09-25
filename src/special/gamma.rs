@@ -16,7 +16,7 @@ pub trait Gamma
     /// ```
     ///
     /// Fore more information:
-    /// <a href="https://en.wikipedia.org/wiki/Gamma_function">https://en.wikipedia.org/wiki/Gamma_function</a>
+    /// <https://en.wikipedia.org/wiki/Gamma_function>
     ///
     /// # Arguments
     ///
@@ -41,7 +41,7 @@ pub trait Gamma
     /// ln&Gamma;(z)
     //
     /// Fore more information:
-    /// <a href="https://en.wikipedia.org/wiki/Gamma_function#The_log-gamma_function">https://en.wikipedia.org/wiki/Gamma_function#The_log-gamma_function</a>
+    /// <https://en.wikipedia.org/wiki/Gamma_function#The_log-gamma_function>
     ///
     /// # Arguments
     ///
@@ -62,7 +62,7 @@ pub trait Gamma
     /// ```
     ///
     /// Fore more information:
-    /// <a href="https://en.wikipedia.org/wiki/Digamma_function">https://en.wikipedia.org/wiki/Digamma_function</a>
+    /// <https://en.wikipedia.org/wiki/Digamma_function>
     ///
     /// # Arguments
     ///
@@ -85,7 +85,7 @@ pub trait Gamma
     /// ```
     ///
     /// Fore more information:
-    /// <a href="https://en.wikipedia.org/wiki/Incomplete_gamma_function#Upper_incomplete_Gamma_function">https://en.wikipedia.org/wiki/Incomplete_gamma_function#Upper_incomplete_Gamma_function</a>
+    /// <https://en.wikipedia.org/wiki/Incomplete_gamma_function#Upper_incomplete_Gamma_function>
     ///
     /// # Arguments
     ///
@@ -673,7 +673,7 @@ impl_gamma!(f32, std::f32::consts::PI, std::f32::consts::E);
 /// ```
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Gamma_function">https://en.wikipedia.org/wiki/Gamma_function</a>
+/// <https://en.wikipedia.org/wiki/Gamma_function>
 ///
 /// # Arguments
 ///
@@ -692,7 +692,8 @@ impl_gamma!(f32, std::f32::consts::PI, std::f32::consts::E);
 /// let gamma: f64 = gamma::gamma(z);
 /// ```
 /// The following approximation is implemented
-/// https://en.wikipedia.org/wiki/Lanczos_approximation
+/// <https://en.wikipedia.org/wiki/Lanczos_approximation>
+///
 pub fn gamma<T>(z: T) -> T
     where T: Real + Gamma
 {
@@ -704,7 +705,7 @@ pub fn gamma<T>(z: T) -> T
 /// ln&Gamma;(z)
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Gamma_function#The_log-gamma_function">https://en.wikipedia.org/wiki/Gamma_function#The_log-gamma_function</a>
+/// <https://en.wikipedia.org/wiki/Gamma_function#The_log-gamma_function>
 ///
 /// # Arguments
 ///
@@ -731,7 +732,7 @@ pub fn ln_gamma<T>(x: T) -> T
 /// ```
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Digamma_function">https://en.wikipedia.org/wiki/Digamma_function</a>
+/// <https://en.wikipedia.org/wiki/Digamma_function>
 ///
 /// # Arguments
 ///
@@ -758,7 +759,7 @@ pub fn digamma<T>(x: T) -> T
 /// ```
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Incomplete_gamma_function#Upper_incomplete_Gamma_function">https://en.wikipedia.org/wiki/Incomplete_gamma_function#Upper_incomplete_Gamma_function</a>
+/// <https://en.wikipedia.org/wiki/Incomplete_gamma_function#Upper_incomplete_Gamma_function>
 ///
 /// # Arguments
 ///
@@ -890,7 +891,7 @@ pub fn gamma_l<T>(a: T, x: T) -> T
 /// .wikipedia.org/wiki/Incomplete_gamma_function#
 /// Regularized_Gamma_functions_and_Poisson_random_variables</a>
 ///
-/// https://people.sc.fsu.edu/~jburkardt/c_src/asa239/asa239.c
+/// <https://people.sc.fsu.edu/~jburkardt/c_src/asa239/asa239.c>
 /// # Arguments
 ///
 /// * `a`

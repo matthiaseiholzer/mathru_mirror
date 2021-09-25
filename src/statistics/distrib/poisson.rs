@@ -13,7 +13,8 @@ use std::clone::Clone;
 /// Poisson distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Poisson_distribution">https://en.wikipedia.org/wiki/Poisson_distribution</a>
+/// <https://en.wikipedia.org/wiki/Poisson_distribution>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct Poisson<T>

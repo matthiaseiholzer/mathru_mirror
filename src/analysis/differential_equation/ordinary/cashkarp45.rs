@@ -15,11 +15,11 @@ use crate::analysis::differential_equation::ordinary::{
 
 /// Solves an ODE using the 4th order Cash-Karp algorithm.
 ///
-///<a href="https://en.wikipedia.org/wiki/Cash-Karp_method">https://en.wikipedia.org/wiki/Cash-Karp_method</a>
+///<https://en.wikipedia.org/wiki/Cash-Karp_method>
 ///
 /// # Example
 ///
-/// For this example, we want to solve the following ordinary differiential
+/// For this example, we want to solve the following ordinary differential
 /// equation:
 /// ```math
 /// \frac{dy}{dt} = ay = f(t, y)

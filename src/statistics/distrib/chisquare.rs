@@ -11,7 +11,8 @@ use std::clone::Clone;
 /// Chi-Square distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Chi-square_distribution">https://en.wikipedia.org/wiki/Chi-square_distribution</a>
+/// <https://en.wikipedia.org/wiki/Chi-square_distribution>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct ChiSquare<T>

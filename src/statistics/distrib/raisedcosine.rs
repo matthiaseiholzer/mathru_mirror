@@ -6,7 +6,7 @@ use std::clone::Clone;
 /// Raised Cosine distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Raised_cosine_distribution">https://en.wikipedia.org/wiki/Raised_cosine_distribution</a>
+/// <https://en.wikipedia.org/wiki/Raised_cosine_distribution>
 ///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]

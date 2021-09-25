@@ -7,7 +7,8 @@ use std::clone::Clone;
 /// Beta distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Beta_distribution">https://en.wikipedia.org/wiki/Beta_distribution</a>
+/// <https://en.wikipedia.org/wiki/Beta_distribution>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct Beta<T>

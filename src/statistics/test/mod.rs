@@ -1,8 +1,8 @@
 //! Statistical hypothesis tests
 //!
 //! Fore more information:
-//! <a href="https://en.wikipedia.org/wiki/Statistical_hypothesis_testing">https://en.wikipedia
-//! .org/wiki/Statistical_hypothesis_testing</a>
+//! <https://en.wikipedia.org/wiki/Statistical_hypothesis_testing>
+//!
 
 mod chisquare;
 mod g;

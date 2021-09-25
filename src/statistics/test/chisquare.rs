@@ -13,7 +13,7 @@ use std::clone::Clone;
 /// Chi-Square Test
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Chi-square_test">https://en.wikipedia.org/wiki/Chi-square_test</a>
+/// <https://en.wikipedia.org/wiki/Chi-square_test>
 ///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]

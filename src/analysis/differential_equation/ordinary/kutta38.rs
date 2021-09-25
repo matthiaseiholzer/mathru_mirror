@@ -12,15 +12,16 @@ use serde::{Deserialize, Serialize};
 
 /// Solves an ODE using the 4th order 3/8-rule Runge-Kutta algorithm.
 ///
-///<a href="https://en.wikipedia.org/wiki/Runge-Kutta_methods">https://en.wikipedia.org/wiki/Rung-Kutta_methods</a>
+///<https://en.wikipedia.org/wiki/Rung-Kutta_methods>
+///
 /// # Example
 ///
-/// For this example, we want to solve the following ordinary differiential
+/// For this example, we want to solve the following ordinary differential
 /// equation:
 /// ```math
 /// \frac{dy}{dt} = ay = f(t, y)
 /// ```
-/// The inial condition is $`y(0) = 0.5`$ and we solve it in the interval
+/// The initial condition is $`y(0) = 0.5`$ and we solve it in the interval
 /// $`\lbrack 0, 2\rbrack`$ The following equation is the closed solution for
 /// this ODE:
 /// ```math

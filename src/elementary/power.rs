@@ -3,7 +3,7 @@ use crate::algebra::abstr::Sign;
 
 /// Power functions
 ///
-///<a href="https://en.wikipedia.org/wiki/Exponentiation#Power_functions">https://en.wikipedia.org/wiki/Exponentiation#Power_functions</a>
+///<https://en.wikipedia.org/wiki/Exponentiation#Power_functions>
 pub trait Power
 {
     fn pow(self: Self, exp: Self) -> Self;

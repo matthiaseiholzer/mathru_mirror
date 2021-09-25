@@ -25,7 +25,7 @@ use super::{abeliangroup::AbelianGroupAdd, monoid::MonoidMul};
 /// - $`(b + c) * a = (b * a) + (c * a), \forall a, b, c \in \mathbb{R}`$ (right
 ///   distributivity)
 ///
-/// <a href="https://en.wikipedia.org/wiki/Ring_(mathematics)">https://en.wikipedia.org/wiki/Ring_(mathematics)</a>
+/// <https://en.wikipedia.org/wiki/Ring_(mathematics)>
 pub trait Ring: AbelianGroupAdd + MonoidMul
 {
 }

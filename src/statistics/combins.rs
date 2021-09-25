@@ -1,6 +1,6 @@
 /// Factorial
 ///
-/// <a href="https://en.wikipedia.org/wiki/Factorial">https://en.wikipedia.org/wiki/Factorial</a>
+/// <https://en.wikipedia.org/wiki/Factorial>
 pub fn factorial(f: u32) -> u64
 {
     let mut n: u64 = f as u64;
@@ -15,7 +15,7 @@ pub fn factorial(f: u32) -> u64
 
 /// Binomial coefficient
 ///
-/// <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">https://en.wikipedia.org/wiki/Binomial_coefficient</a>
+/// <https://en.wikipedia.org/wiki/Binomial_coefficient>
 pub fn binom(n: u32, k: u32) -> u32
 {
     (factorial(n) / (factorial(k) * factorial(n - k))) as u32

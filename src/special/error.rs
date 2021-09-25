@@ -83,7 +83,7 @@ impl Error for f64
         return 1.0 - self.erf();
     }
 
-    /// https://en.wikipedia.org/wiki/Error_function#Inverse_functions.
+    /// <https://en.wikipedia.org/wiki/Error_function#Inverse_functions>.
     /// Using the rational approximations tabulated in:
     ///J. M. Blair, C. A. Edwards, and J. H. Johnson,
     /// "Rational Chebyshev approximations for the inverse of the error function",

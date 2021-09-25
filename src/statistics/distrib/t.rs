@@ -13,8 +13,7 @@ use std::clone::Clone;
 /// T distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/T_distribution">https://en.wikipedia.org/wiki/T_distribution</a>
-///
+/// <https://en.wikipedia.org/wiki/T_distributiona>
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct T<K>

@@ -6,7 +6,7 @@ use crate::elementary::exponential::Exponential;
 
 /// Hyperbolic functions
 ///
-///<a href="https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions">https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions</a>
+///<https://en.wikipedia.org/wiki/Inverse_hyperbolic_functions>
 pub trait Hyperbolic
 {
     /// Hyperbolic sine

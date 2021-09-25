@@ -8,7 +8,8 @@ use std::clone::Clone;
 /// Log-Normal distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Log-normal_distribution">https://en.wikipedia.org/wiki/Log-normal_distribution</a>
+/// <https://en.wikipedia.org/wiki/Log-normal_distribution>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct LogNormal<T>

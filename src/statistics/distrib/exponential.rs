@@ -8,7 +8,8 @@ use std::clone::Clone;
 /// Exponential distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Exponential_distribution">https://en.wikipedia.org/wiki/Exponential_distribution</a>
+/// <https://en.wikipedia.org/wiki/Exponential_distribution>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct Exponential<T>

@@ -17,7 +17,7 @@ use serde::{Deserialize, Serialize};
 /// T-Test
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Student%27s_t-test">https://en.wikipedia.org/wiki/Student%27s_t-test</a>
+/// <https://en.wikipedia.org/wiki/Student%27s_t-test>
 ///
 /// # Example
 /// ```

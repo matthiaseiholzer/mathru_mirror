@@ -60,7 +60,7 @@ impl<T> Polynomial<T>
     /// Creates a new polynomial from the given roots
     ///
     ///
-    /// https://en.wikipedia.org/wiki/Vieta%27s_formulas
+    /// <https://en.wikipedia.org/wiki/Vieta%27s_formulas>
     ///
     /// # Arguments
     ///

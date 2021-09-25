@@ -12,7 +12,8 @@ use serde::{Deserialize, Serialize};
 
 /// Solves an ODE using midpoint method.
 ///
-/// <a href="https://en.wikipedia.org/wiki/Midpoint_method">https://en.wikipedia.org/wiki/Midpoint_method</a>
+/// <https://en.wikipedia.org/wiki/Midpoint_method>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Debug)]
 pub struct Midpoint<T>

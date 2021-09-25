@@ -12,7 +12,7 @@ use serde::{Deserialize, Serialize};
 /// G-Test
 ///
 /// Fore more information:
-/// <a href="https://de.wikipedia.org/wiki/G-Test">https://de.wikipedia.org/wiki/G-Test</a>
+/// <https://de.wikipedia.org/wiki/G-Test>
 ///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]

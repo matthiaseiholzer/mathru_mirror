@@ -4,7 +4,7 @@
 //! statistical functions.
 //!
 //! Fore more information:
-//! <a href="https://en.wikipedia.org/wiki/Statistics">https://en.wikipedia.org/wiki/Statistics</a>
+//! <https://en.wikipedia.org/wiki/Statistics>
 
 pub mod combins;
 pub mod distrib;

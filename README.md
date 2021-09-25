@@ -31,26 +31,30 @@ The following features are implemented in this create:
             * Trace
             * [Solve linear system](https://matthiaseiholzer.gitlab.io/mathru/documentation/algebra/linear/matrix/#linear-system-resolution)
 
-* [Ordinary differential equation (ODE)](https://matthiaseiholzer.gitlab.io/mathru/documentation/analysis/differentialeq/)
-    * [Explicit methods](https://matthiaseiholzer.gitlab.io/mathru/documentation/analysis/differentialeq/ode/explicit/)
-        * Euler method
-        * Heun's 2nd order method
-        * Midpoint method
-        * Ralston's 2nd order method
-        * Kutta 3rd order
-        * Heun's 3rd order method
-        * Ralston's 3rd order method
-        * Runge-Kutta 4th order
-        * Runge-Kutta-Felhberg
-        * Dormand-Prince
-        * Cash-Karp
-        * Tsitouras
-        * Bogacki-Shampine
-        * Adams-Bashforth
-    * Automatic step size control with starting step size
-    * [Implicit methods](https://matthiaseiholzer.gitlab.io/mathru/documentation/analysis/differentialeq/ode/implicit)
-        * Implicit Euler
-        * Backward differentiation formula (BDF)
+* Analysis
+    * Integration
+        * Newton-Cotes
+        * Gauss-Legendre
+    * [Ordinary differential equation (ODE)](https://matthiaseiholzer.gitlab.io/mathru/documentation/analysis/differentialeq/)
+        * [Explicit methods](https://matthiaseiholzer.gitlab.io/mathru/documentation/analysis/differentialeq/ode/explicit/)
+            * Euler method
+            * Heun's 2nd order method
+            * Midpoint method
+            * Ralston's 2nd order method
+            * Kutta 3rd order
+            * Heun's 3rd order method
+            * Ralston's 3rd order method
+            * Runge-Kutta 4th order
+            * Runge-Kutta-Felhberg
+            * Dormand-Prince
+            * Cash-Karp
+            * Tsitouras
+            * Bogacki-Shampine
+            * Adams-Bashforth
+        * Automatic step size control with starting step size
+        * [Implicit methods](https://matthiaseiholzer.gitlab.io/mathru/documentation/analysis/differentialeq/ode/implicit)
+            * Implicit Euler
+            * Backward differentiation formula (BDF)
 
 * [Optimization](https://matthiaseiholzer.gitlab.io/mathru/documentation/optimization)
     * Gauss-Newton algorithm

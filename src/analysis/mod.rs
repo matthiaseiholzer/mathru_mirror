@@ -1,7 +1,7 @@
 //! Analysis
 //!
 //! Fore more information: <br>
-//! <a href="https://en.wikipedia.org/wiki/Analysis">https://en.wikipedia.org/wiki/Analysis</a>
+//! <https://en.wikipedia.org/wiki/Analysis>
 
 //pub mod interpolation;
 #[macro_use]
@@ -12,6 +12,7 @@ mod jacobian;
 mod newton_raphson;
 
 pub mod differential_equation;
+pub mod integral;
 
 pub use function::Function;
 pub use hessian::Hessian;

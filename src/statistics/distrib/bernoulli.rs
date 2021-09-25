@@ -8,7 +8,8 @@ use std::clone::Clone;
 ///
 /// Fore more information:
 ///
-/// <a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">https://en.wikipedia.org/wiki/Bernoulli_distribution</a>
+/// <https://en.wikipedia.org/wiki/Bernoulli_distribution>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct Bernoulli<T>

@@ -43,7 +43,7 @@ impl_real!(f32, f32; f64, f64);
 
 /// Real number
 ///
-///<a href="https://en.wikipedia.org/wiki/Real_number">https://en.wikipedia.org/wiki/Real_number</a>
+///<https://en.wikipedia.org/wiki/Real_number>
 pub trait Real: Field + Scalar + Exponential + Trigonometry + Power + Hyperbolic + AbsDiffEq<Epsilon = Self> + RelativeEq
 {
     /// Returns the smallest integer greater than or equal to a number.

@@ -13,7 +13,7 @@ use std::clone::Clone;
 
 /// Solves an ODE using the 4th order Runge-Kutta-Dormand-Prince algorithm.
 ///
-///<a href="https://en.wikipedia.org/wiki/Dormand-Prince_method">https://en.wikipedia.org/wiki/Dormand-Prince_method</a>
+///<https://en.wikipedia.org/wiki/Dormand-Prince_method>
 ///
 /// # Example
 ///

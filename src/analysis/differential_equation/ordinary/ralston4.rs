@@ -11,7 +11,8 @@ use serde::{Deserialize, Serialize};
 
 /// Solves an ODE using Ralston's 4th order method.
 ///
-/// <a href="https://en.wikipedia.org/wiki/List_of_Runge-Kutta_methods">https://en.wikipedia.org/wiki/List_of_Runge-Kutta_methods</a>
+/// <https://en.wikipedia.org/wiki/List_of_Runge-Kutta_methods>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Debug)]
 pub struct Ralston4<T>

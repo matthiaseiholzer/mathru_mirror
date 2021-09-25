@@ -10,8 +10,7 @@ use std::clone::Clone;
 /// Uniform distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)">https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)</a>
-///
+/// <https://en.wikipedia.org/wiki/Uniform_distribution_(continuous)>
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct Uniform<T>

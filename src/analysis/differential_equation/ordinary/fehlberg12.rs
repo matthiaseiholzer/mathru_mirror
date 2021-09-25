@@ -15,8 +15,7 @@ use serde::{Deserialize, Serialize};
 /// order \mathcal{O}(h^4) with an error estimator of order \mathcal{O}(h^5)
 /// ```
 ///
-///<a href="https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method">https://en.wikipedia
-/// .org/wiki/Runge-Kutta-Fehlberg_method</a>
+///<https://en.wikipedia.org/wiki/Runge-Kutta-Fehlberg_method>
 ///
 /// # Example
 ///

@@ -10,7 +10,8 @@ use std::clone::Clone;
 /// Binomial distribution
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Binomial_distribution">https://en.wikipedia.org/wiki/Binomial_distribution</a>
+/// <https://en.wikipedia.org/wiki/Binomial_distribution>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Copy, Debug)]
 pub struct Binomial<T>

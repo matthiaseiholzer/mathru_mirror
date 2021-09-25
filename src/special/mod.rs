@@ -5,8 +5,7 @@
 //! geometry, physics, or other applications.
 //!
 //! Fore more information:
-//! <a href="https://en.wikipedia.org/wiki/List_of_mathematical_functions">https://en.wikipedia
-//! .org/wiki/List_of_mathematical_functions</a>
+//! <https://en.wikipedia.org/wiki/List_of_mathematical_functions>
 
 pub mod beta;
 pub mod gamma;

@@ -11,16 +11,16 @@ use std::clone::Clone;
 
 /// Solves an ODE using Heun's 3rd order method.
 ///
-/// <a href="https://en.wikipedia.org/wiki/Heun's_method">https://en.wikipedia.org/wiki/Heun's_method</a>
+/// <https://en.wikipedia.org/wiki/Heun's_method>
 ///
 /// # Example
 ///
-/// For this example, we want to solve the following ordinary differiential
+/// For this example, we want to solve the following ordinary differential
 /// equation:
 /// ```math
 /// \frac{dy}{dt} = ay = f(t, y)
 /// ```
-/// The inial condition is $`y(0) = 0.5`$ and we solve it in the interval
+/// The initial condition is $`y(0) = 0.5`$ and we solve it in the interval
 /// $`\lbrack 0, 2\rbrack`$ The following equation is the closed solution for
 /// this ODE:
 /// ```math

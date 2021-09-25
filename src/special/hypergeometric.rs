@@ -174,17 +174,16 @@ impl_hypergeometric!(f32, f21_f32_norm, 0.0000000000000002, std::f32::INFINITY);
 /// if the argument conditions are not fulfilled
 ///
 /// Fore more information:
-/// <a href="https://en.wikipedia.org/wiki/Hypergeometric_function">https://en.wikipedia.org/wiki/Hypergeometric_function</a>
+/// <https://en.wikipedia.org/wiki/Hypergeometric_function>
 ///
 /// The implementation follows the suggested algorithm in the follow:
 /// Numerical methods for the computation of the confluent and Gauss
 /// hypergeometric functions Pearson et al. 20
 /// Taylor series, Method a)
-/// <a href="https://arxiv.org/abs/1407.7786">https://arxiv.org/abs/1407.7786</a>
-/// https://arxiv.org/abs/1407.7786
+/// <https://arxiv.org/abs/1407.7786>
 ///
-/// https://cran.r-project.org/web/packages/hypergeo/vignettes/hypergeometric.pdf
-/// http://people.maths.ox.ac.uk/porterm/research/pearson_final.pdf
+/// <https://cran.r-project.org/web/packages/hypergeo/vignettes/hypergeometric.pdf>
+/// <http://people.maths.ox.ac.uk/porterm/research/pearson_final.pdf>
 pub fn f21<T>(a: T, b: T, c: T, z: T) -> T
     where T: Real + Hypergeometric
 {

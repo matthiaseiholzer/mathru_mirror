@@ -12,7 +12,8 @@ use serde::{Deserialize, Serialize};
 
 /// Solves an ODE using the 4th order Runge-Kutta algorithm.
 ///
-///<a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">https://en.wikipedia.org/wiki/Rung-Kutta_methods</a>
+///<https://en.wikipedia.org/wiki/Rung-Kutta_methods>
+///
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[derive(Clone, Debug)]
 pub struct RungeKutta4<T>

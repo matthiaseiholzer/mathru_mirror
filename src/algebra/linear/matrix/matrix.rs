@@ -302,9 +302,9 @@ impl<T> Matrix<T> where T: Field + Scalar + Power
     }
 
     #[cfg(feature = "native")]
-    /// function [c,s] = Givens(a,b)
+    /// function \[c,s\] = Givens(a,b)
     /// Givens rotation computation
-    /// Determines cosine-sine pair (c,s) so that [c s;-s c]'*[a;b] = [r;0]
+    /// Determines cosine-sine pair (c,s) so that \[c s;-s c\]'*\[a;b\] = \[r;0\]
     /// GVL4: Algorithm 5.1.3
     pub fn givens_cosine_sine_pair(a: T, b: T) -> (T, T)
     {
