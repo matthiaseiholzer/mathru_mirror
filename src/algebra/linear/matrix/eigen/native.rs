@@ -81,7 +81,7 @@ impl<T> Matrix<T> where T: Field + Scalar + Power + AbsDiffEq<Epsilon = T>
 
             for k in 0..(p - 2)
             {
-                let b: Vector<T> = Vector::new_column(3, vec![x, y, z]);
+                let b: Vector<T> = Vector::new_column(vec![x, y, z]);
                 let h: Matrix<T> = Matrix::householder(&b, 0);
 
                 //Determine the Householder reflector P with P [x; y; z] = αe1 ;

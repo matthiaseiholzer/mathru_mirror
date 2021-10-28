@@ -43,23 +43,27 @@ impl<T> ButcherFixedStepSize<T>
     pub fn do_step<F>(self: &Self, prob: &F, t_n: &T, x_n: &Vector<T>, h: &T) -> Vector<T>
         where F: ExplicitODE<T>,
     {
-        let mut k: Vec<Vector<T>> = Vec::with_capacity(self.b.len());
-        let (rows, _columns): (usize, usize) = x_n.dim();
+        // let mut k: Vec<Vector<T>> = Vec::with_capacity(self.b.len());
+        // let (rows, _columns): (usize, usize) = x_n.dim();
 
-        k.push(prob.func(t_n, x_n));
+        // k.push(prob.func(t_n, x_n));
 
-        for j in 1..self.b.len()
-        {
-            let i_b = (j - 1) * j / 2;
-            let i_e = i_b + j;
+        // for j in 1..self.b.len()
+        // {
+        //     let i_b = (j - 1) * j / 2;
+        //     let i_e = i_b + j;
+        //
+        //     let mut sum = Vector::zero(rows);
+        //
+        //     self.a[i_b..i_e].iter().zip(k.iter()).map(|(a_jl, k_l)| k_l * a_jl).for_each( |b| { sum += b});
+        //
+        //     k.push(prob.func(&(*t_n + self.c[j - 1] * *h), &(x_n + &(&sum * h))));
+        // }
+        // let mut sum = Vector::zero(rows);
+        // self.b.iter().zip(k.iter()).map(|(b, k_j)|  k_j * b).for_each(|b| {sum += b});
+        //x_n + &(&sum * h)
+        x_n.clone() //+ &(&k[0].clone() * h);
 
-            let sum= self.a[i_b..i_e].iter().zip(k.iter()).map(|(a_jl, k_l)| k_l * a_jl).fold(Vector::zero(rows),  | a, b| a + b);
-
-            k.push(prob.func(&(*t_n + self.c[j - 1] * *h), &(x_n + &(&sum * h))));
-        }
-
-        let sum: Vector<T> = self.b.iter().zip(k.iter()).map(|(b, k_j)|  k_j * b).fold(Vector::zero(rows), |a, b| a + b);
-        x_n + &(&sum * h)
     }
 }
 

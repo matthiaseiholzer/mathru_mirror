@@ -30,6 +30,7 @@ mod det;
 mod singular;
 mod cholesky;
 pub use self::cholesky::CholeskyDec;
+mod index;
 
 mod solve;
 mod substitute;

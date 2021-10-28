@@ -1,3 +1,5 @@
+cargo-features = ["edition2021"]
+
 [package]
 name = "mathru"
 version = "0.10.1"
@@ -12,7 +14,7 @@ homepage = "https://matthiaseiholzer.gitlab.io/mathru"
 repository = "https://gitlab.com/matthiaseiholzer/mathru"
 documentation = "https://docs.rs/crate/mathru/latest/"
 autobenches = false
-edition = "2018"
+edition = "2021"
 
 
 [package.metadata.docs.rs]
@@ -91,7 +93,7 @@ optional = true
 version = "^1.0"
 
 [dev-dependencies.criterion]
-version = "^0.3"
+version = "0.3.5"
 
 [dev-dependencies.nalgebra]
 version = "0.29.0"

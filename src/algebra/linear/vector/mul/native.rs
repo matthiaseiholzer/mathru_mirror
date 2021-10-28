@@ -42,11 +42,12 @@ impl<'a, 'b, T> Mul<&'b Matrix<T>> for &'a Vector<T>
             res.push(sum.clone());
         }
 
-        Vector::new_row(rhs_n, res)
+        Vector::new_row(res)
     }
 }
 
-impl<T> Mul<T> for Vector<T> where T: Field + Scalar
+impl<T> Mul<T> for Vector<T>
+    where T: Field + Scalar
 {
     type Output = Vector<T>;
 
@@ -57,8 +58,8 @@ impl<T> Mul<T> for Vector<T> where T: Field + Scalar
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 2.0, 3.0, 4.0]);
-    /// let res_ref: Vector<f64> = Vector::new_column(4, vec![-5.0, -10.0, -15.0, -20.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
+    /// let res_ref: Vector<f64> = Vector::new_column(vec![-5.0, -10.0, -15.0, -20.0]);
     ///
     /// assert_eq!(res_ref, a * -5.0)
     /// ```
@@ -68,7 +69,8 @@ impl<T> Mul<T> for Vector<T> where T: Field + Scalar
     }
 }
 
-impl<'a, T> Mul<&T> for &'a Vector<T> where T: Field + Scalar
+impl<'a, T> Mul<&T> for &'a Vector<T>
+    where T: Field + Scalar
 {
     type Output = Vector<T>;
 
@@ -79,8 +81,8 @@ impl<'a, T> Mul<&T> for &'a Vector<T> where T: Field + Scalar
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 2.0, 3.0, 4.0]);
-    /// let res_ref: Vector<f64> = Vector::new_column(4, vec![5.0, 10.0, 15.0, 20.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
+    /// let res_ref: Vector<f64> = Vector::new_column(vec![5.0, 10.0, 15.0, 20.0]);
     ///
     /// assert_eq!(res_ref, a * 5.0)
     /// ```
@@ -89,3 +91,28 @@ impl<'a, T> Mul<&T> for &'a Vector<T> where T: Field + Scalar
         Vector { data: (&self.data).mul(rhs) }
     }
 }
+
+impl<'a, T> Mul<&T> for &'a mut Vector<T>
+    where T: Field + Scalar
+{
+    type Output = Self;
+
+    /// Multiplies the vector elements with the scalar value
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use mathru::algebra::linear::Vector;
+    ///
+    /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
+    /// let res_ref: Vector<f64> = Vector::new_column(vec![5.0, 10.0, 15.0, 20.0]);
+    ///
+    /// assert_eq!(res_ref, *((&mut a) * &5.0))
+    /// ```
+    fn mul(self: Self, rhs: &T) -> Self::Output
+    {
+        (&mut self.data).mul(rhs);
+        self
+    }
+}
+

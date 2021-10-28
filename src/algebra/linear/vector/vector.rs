@@ -40,28 +40,16 @@ macro_rules! vector
     ($( $x: expr ),*) =>
     {
         {
-            let data = [ $($x),* ];
-            let rows = data.len();
-            let mut data_array: Vec<_> = Vec::with_capacity(rows);
-            for i in 0..rows
-            {
-                data_array.push(data[i]);
-            }
-            Vector::new_row(rows, data_array)
+            let data_array = vec![ $($x),* ];
+            Vector::new_row(data_array)
         }
     };
 
     ($( $x: expr );*) =>
     {
         {
-            let data = [ $($x),* ];
-            let cols = data.len();
-            let mut data_array: Vec<_> = Vec::with_capacity(cols);
-            for i in 0..cols
-            {
-                data_array.push(data[i]);
-            }
-            Vector::new_column(cols, data_array)
+            let data_array = vec![ $($x),* ];
+            Vector::new_column(data_array)
         }
     };
 }
@@ -121,7 +109,7 @@ impl<T> Vector<T> where T: Field + Scalar + Power
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 0.0, 3.0, -2.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 0.0, 3.0, -2.0]);
     /// let p: f64 = 2.0;
     /// let norm_ref: f64 = a.eucl_norm();
     /// let norm: f64 = a.p_norm(&p);
@@ -162,7 +150,8 @@ impl<T> Vector<T>
     }
 }
 
-impl<T> Vector<T> where T: Field + Scalar + Power + Exponential
+impl<T> Vector<T>
+    where T: Field + Scalar + Power + Exponential
 {
     /// Computes the euclidean norm
     ///
@@ -171,7 +160,7 @@ impl<T> Vector<T> where T: Field + Scalar + Power + Exponential
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 0.0, 3.0, -2.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 0.0, 3.0, -2.0]);
     /// let norm_ref: f64 = 3.7416573867739413;
     /// let norm: f64 = a.eucl_norm();
     ///
@@ -189,40 +178,30 @@ impl<T> Vector<T> where T: Clone + Copy
 {
     /// Returns a row vector
     ///
-    /// # Panics
-    ///
-    /// n != data.len()
-    ///
     /// # Example
     ///
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_row(4, vec![1.0, 0.0, 3.0, -2.0]);
+    /// let a: Vector<f64> = Vector::new_row(vec![1.0, 0.0, 3.0, -2.0]);
     /// ```
-    pub fn new_row(n: usize, data: Vec<T>) -> Self
+    pub fn new_row(data: Vec<T>) -> Self
     {
-        assert_eq!(n, data.len());
-        Vector { data: Matrix::new(1, n, data) }
+        Vector { data: Matrix::new(1, data.len(), data) }
     }
 
     /// Returns a column vector
     ///
-    /// # Panics
-    ///
-    /// m != data.len()
-    ///
     /// # Example
     ///
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 0.0, 3.0, -2.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 0.0, 3.0, -2.0]);
     /// ```
-    pub fn new_column(m: usize, data: Vec<T>) -> Self
+    pub fn new_column(data: Vec<T>) -> Self
     {
-        assert_eq!(m, data.len());
-        Vector { data: Matrix::new(m, 1, data) }
+        Vector { data: Matrix::new(data.len(), 1, data) }
     }
 
     pub fn apply(mut self: Vector<T>, f: &dyn Fn(&T) -> T) -> Self
@@ -267,13 +246,12 @@ impl<T> Vector<T> where T: Field + Scalar
 {
     /// Returns the transposed vector
     ///
-    ///
     /// # Example
     ///
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 0.0, 3.0, -2.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 0.0, 3.0, -2.0]);
     /// let b: Vector<f64> = a.transpose();
     /// ```
     pub fn transpose(mut self: Self) -> Self
@@ -289,26 +267,25 @@ impl<T> Vector<T>
 {
     /// Computes the dot product of two vectors
     ///
-    ///
     /// # Example
     ///
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 0.0, 3.0, -2.0]);
-    /// let b: Vector<f64> = Vector::new_column(4, vec![-1.0, 2.0, 3.0, 5.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 0.0, 3.0, -2.0]);
+    /// let b: Vector<f64> = Vector::new_column(vec![-1.0, 2.0, 3.0, 5.0]);
     /// let dotp_ref: f64 = -2.0;
     ///
     /// let dotp: f64 = a.dotp(&b);
     ///
     /// assert_eq!(dotp_ref, dotp);
     /// ```
-    pub fn dotp<'a, 'b>(self: &'a Self, rhs: &'b Self) -> T
+    pub fn dotp(self: &Self, rhs: &Self) -> T
     {
         let (lhs_m, lhs_n) = self.dim();
         let (rhs_m, rhs_n) = rhs.dim();
-        assert!(lhs_m != 0);
-        assert!(lhs_n == 1);
+        assert_ne!(lhs_m, 0);
+        assert_eq!(lhs_n, 1);
         assert_eq!(lhs_m, rhs_m);
         assert_eq!(lhs_n, rhs_n);
 
@@ -327,7 +304,7 @@ impl<T> Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a = Vector::new_column(4, vec![1.0, 2.0, -3.0, 5.0]);
+    /// let a = Vector::new_column(vec![1.0, 2.0, -3.0, 5.0]);
     /// let idx = a.argmax();
     /// assert_eq!(idx, 3);
     /// ```
@@ -364,7 +341,7 @@ impl<T> Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a = Vector::new_column(4, vec![1.0, -2.0, -6.0, 75.0]);
+    /// let a = Vector::new_column(vec![1.0, -2.0, -6.0, 75.0]);
     /// let b = a.argmin();
     /// assert_eq!(b, 2);
     /// ```
@@ -377,7 +354,7 @@ impl<T> Vector<T>
 
         let limit: usize = m.max(n);
 
-        assert!(limit != 0);
+        assert_ne!(limit, 0);
 
         for idx in 0..limit
         {
@@ -403,8 +380,8 @@ impl<T> Vector<T>
     /// ```
     /// use mathru::algebra::linear::{Matrix, Vector};
     ///
-    /// let a: Vector<f64> = Vector::new_row(4, vec![1.0, 0.0, 3.0, -2.0]);
-    /// let b: Vector<f64> = Vector::new_column(4, vec![-1.0, 2.0, 3.0, 5.0]);
+    /// let a: Vector<f64> = Vector::new_row(vec![1.0, 0.0, 3.0, -2.0]);
+    /// let b: Vector<f64> = Vector::new_column(vec![-1.0, 2.0, 3.0, 5.0]);
     ///
     /// let m: Matrix<f64> = a.dyadp(&b);
     /// ```
@@ -422,84 +399,6 @@ impl<T> Vector<T>
             }
         }
         c
-    }
-}
-
-impl<T> Vector<T>
-//where T: One + Zero
-{
-    /// Returns the mutual component
-    ///
-    /// # Arguments
-    ///
-    /// # Panics
-    ///
-    /// if i out of bounds
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// use mathru::algebra::linear::Vector;
-    ///
-    /// let mut a: Vector<f64> = Vector::new_row(4, vec![1.0, 0.0, 3.0, -2.0]);
-    ///
-    /// *a.get_mut(1) = -4.0;
-    /// ```
-    pub fn get_mut(self: &mut Self, i: usize) -> &mut T
-    {
-        let (m, n): (usize, usize) = self.data.dim();
-        assert!(m == 1 || n == 1);
-
-        if m == 1
-        {
-            //row vector
-            assert!(i < n);
-            self.data.get_mut(0, i)
-        }
-        else
-        {
-            //column vector
-            assert!(i < m);
-            self.data.get_mut(i, 0)
-        }
-    }
-}
-
-impl<T> Vector<T>
-//where T: One + Zero
-{
-    /// Returns the component
-    ///
-    /// # Panics
-    ///
-    /// if i out of bounds
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// use mathru::algebra::linear::Vector;
-    ///
-    /// let mut a: Vector<f64> = Vector::new_row(4, vec![1.0, 0.0, 3.0, -2.0]);
-    ///
-    /// assert_eq!(-2.0, *a.get_mut(3))
-    /// ```
-    pub fn get(self: &Self, i: usize) -> &T
-    {
-        let (m, n): (usize, usize) = self.data.dim();
-        assert!(m == 1 || n == 1);
-
-        if m == 1
-        {
-            //row vector
-            assert!(i < n);
-            self.data.get(0, i)
-        }
-        else
-        {
-            //column vector
-            assert!(i < m);
-            self.data.get(i, 0)
-        }
     }
 }
 
@@ -531,7 +430,7 @@ impl<T> Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![0.0, 0.0, 0.0, 0.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![0.0, 0.0, 0.0, 0.0]);
     /// let b: Vector<f64> = Vector::zero(4);
     ///
     /// assert_eq!(a, b)
@@ -552,7 +451,7 @@ impl<T> Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 1.0, 1.0, 1.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 1.0, 1.0, 1.0]);
     /// let b: Vector<f64> = Vector::one(4);
     ///
     /// assert_eq!(a, b)
@@ -566,7 +465,7 @@ impl<T> Vector<T>
             vec.push(T::one());
         }
 
-        return Vector::new_column(m, vec);
+        return Vector::new_column(vec);
     }
 }
 
@@ -579,7 +478,7 @@ impl<T> Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 2.0, 3.0, 4.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
     /// let (m, n): (usize, usize) = a.dim();
     /// assert_eq!(4, m);
     /// assert_eq!(1, n);
@@ -612,10 +511,10 @@ impl<T> Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let mut a: Vector<f64> = Vector::new_column(4, vec![1.0, -2.0, 3.0, -7.0]);
+    /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, -2.0, 3.0, -7.0]);
     /// a = a.get_slice(1, 2);
     ///
-    /// let a_ref: Vector<f64> = Vector::new_column(2, vec![-2.0, 3.0]);
+    /// let a_ref: Vector<f64> = Vector::new_column(vec![-2.0, 3.0]);
     ///
     /// assert_eq!(a_ref, a);
     /// ```
@@ -656,11 +555,11 @@ impl<T> Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let mut a: Vector<f64> = Vector::new_column(4, vec![1.0, -2.0, 3.0, -7.0]);
-    /// let b: Vector<f64> = Vector::new_column(2, vec![-5.0, 4.0]);
+    /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, -2.0, 3.0, -7.0]);
+    /// let b: Vector<f64> = Vector::new_column(vec![-5.0, 4.0]);
     /// a.set_slice(&b, 1);
     ///
-    /// let a_ref: Vector<f64> = Vector::new_column(4, vec![1.0, -5.0, 4.0, -7.0]);
+    /// let a_ref: Vector<f64> = Vector::new_column(vec![1.0, -5.0, 4.0, -7.0]);
     ///
     /// assert_eq!(a_ref, a);
     /// ```
@@ -686,7 +585,7 @@ impl<T> PartialEq<Self> for Vector<T> where T: Scalar
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![0.0, 0.0, 0.0, 0.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![0.0, 0.0, 0.0, 0.0]);
     /// let b: Vector<f64> = Vector::zero(4);
     ///
     /// assert_eq!(true, a.eq(&b))

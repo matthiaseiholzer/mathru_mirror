@@ -95,8 +95,8 @@ fn main()
         t_vec.push(t_i);
     }
 
-    let t: Vector<f64> = Vector::new_column(num_samples, t_vec.clone());
-    let x: Vector<f64> = Vector::new_column(num_samples, x_vec.clone());
+    let t: Vector<f64> = Vector::new_column(t_vec.clone());
+    let x: Vector<f64> = Vector::new_column(x_vec.clone());
 
     let example_function = Example::new(t, x);
 

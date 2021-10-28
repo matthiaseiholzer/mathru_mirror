@@ -95,7 +95,9 @@ impl<'a, 'b, T> Add<&'b T> for &'a Matrix<T> where T: Field + Scalar
     /// ```
     fn add(self: Self, rhs: &T) -> Self::Output
     {
-        return self.apply(&|x: &T| -> T { *x + *rhs });
+        self.apply_mut(&|x: &T| -> T { *x + *rhs });
+
+        return *self;
     }
 }
 

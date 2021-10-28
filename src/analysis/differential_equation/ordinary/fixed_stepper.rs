@@ -61,16 +61,19 @@ impl<T> FixedStepper<T> where T: Real
         let mut t_vec: Vec<T> = Vec::with_capacity(steps);
         let mut res_vec: Vec<Vector<T>> = Vec::with_capacity(steps);
 
+t_vec.push(T::zero());
+    res_vec.push(init);
+
         for _i in 0..steps
         {
             let h: T = self.step_size.min(t_stop - t_n);
 
-            t_vec.push(t_n);
-            res_vec.push(x_n.clone());
+            //t_vec.push(t_n);
+            //res_vec.push(x_n.clone());
 
             x_n = method.do_step(prob, &t_n, &x_n, &h);
 
-            t_n = t_n + h;
+            //t_n += h;
         }
 
         return Ok((t_vec, res_vec));

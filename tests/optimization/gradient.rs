@@ -11,7 +11,7 @@ fn minimization_quadratic()
     let optim: Gradient<f64> = Gradient::new(0.1, 100);
     let function: QuadraticFunction = QuadraticFunction::new();
 
-    let x_0: Vector<f64> = Vector::new_column(2, vec![1.0, -1.0]);
+    let x_0: Vector<f64> = Vector::new_column(vec![1.0, -1.0]);
 
     let x_min: Vector<f64> = optim.minimize(&function, &x_0).arg();
 

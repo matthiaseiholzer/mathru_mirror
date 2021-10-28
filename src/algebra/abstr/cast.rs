@@ -491,7 +491,7 @@ impl_to_primitive_uint!(u128);
 
 macro_rules! impl_to_primitive_float_to_float {
     ($SrcT:ident, $DstT:ident, $slf:expr) => {
-        return $slf as $DstT;
+        return $slf as $DstT
     };
 }
 

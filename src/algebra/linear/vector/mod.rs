@@ -8,6 +8,7 @@ mod mul;
 mod add;
 mod sub;
 mod div;
+mod index;
 
 pub use self::{
     vector::Vector, vectorintoiterator::VectorIntoIterator, vectoriterator::VectorIterator,

@@ -74,6 +74,29 @@ impl<'a, 'b, T> Sub<&'b T> for &'a Matrix<T> where T: Field + Scalar
     }
 }
 
+///
+/// Subtracts scalar from all matrix elements
+impl<'a, 'b, T> Sub<&'b T> for &'a mut Matrix<T> where T: Field + Scalar
+{
+    type Output = &'a mut Matrix<T>;
+
+    /// Subtracts a scalar value from all matrix elements
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use mathru::algebra::linear::Matrix;
+    ///
+    /// let a: Matrix<f64> = Matrix::new(2, 2, vec![1.0, 0.0, 3.0, -7.0]);
+    /// let b: Matrix<f64> = &a - &-4.0;
+    /// ```
+    fn sub(self: Self, rhs: &T) -> Self::Output
+    {
+        self.mut_apply(&|x: &mut T| -> T { *x - *rhs });
+        return self;
+    }
+}
+
 impl<T> Sub<T> for Matrix<T> where T: Field + Scalar
 {
     type Output = Matrix<T>;

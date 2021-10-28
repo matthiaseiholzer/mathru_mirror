@@ -2,7 +2,7 @@
 
 [![crate](https://img.shields.io/crates/v/mathru.svg)](https://crates.io/crates/mathru)
 [![documentation](https://docs.rs/mathru/badge.svg)](https://docs.rs/mathru)
-![minimum rustc 1.54.0](https://img.shields.io/badge/rustc-1.54.0-green.svg)
+![minimum rustc 1.56.0](https://img.shields.io/badge/rustc-1.56.0-green.svg)
 ![maintenance](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
 [![pipeline status](https://gitlab.com/matthiaseiholzer/mathru/badges/main/pipeline.svg)](https://gitlab.com/matthiaseiholzer/mathru/-/commits/main)
 [![coverage report](https://gitlab.com/matthiaseiholzer/mathru/badges/main/coverage.svg)](https://gitlab.com/matthiaseiholzer/mathru/-/commits/main)

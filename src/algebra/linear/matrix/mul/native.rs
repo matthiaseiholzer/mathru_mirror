@@ -31,7 +31,7 @@ impl<'a, 'b, T> Mul<&'b Vector<T>> for &'a Matrix<T> where T: Field + Scalar
             prod_data.push(row_column_product);
         }
 
-        Vector::new_column(self.m, prod_data)
+        Vector::new_column(prod_data)
     }
 }
 
@@ -83,7 +83,8 @@ impl<'a, 'b, T> Mul<&'b T> for &'a Matrix<T> where T: Field + Scalar
 }
 
 // Multiplies matrix by vector.
-impl<T> Mul<Vector<T>> for Matrix<T> where T: Field + Scalar
+impl<T> Mul<Vector<T>> for Matrix<T>
+    where T: Field + Scalar
 {
     type Output = Vector<T>;
 
@@ -93,7 +94,8 @@ impl<T> Mul<Vector<T>> for Matrix<T> where T: Field + Scalar
     }
 }
 
-impl<T> Mul<Matrix<T>> for Matrix<T> where T: Field + Scalar
+impl<T> Mul<Matrix<T>> for Matrix<T>
+    where T: Field + Scalar
 {
     type Output = Matrix<T>;
 
@@ -115,7 +117,36 @@ impl<T> Mul<Matrix<T>> for Matrix<T> where T: Field + Scalar
     }
 }
 
-impl<'a, 'b, T> Mul<&'b Matrix<T>> for &'a Matrix<T> where T: Field + Scalar
+/// Add scalar to matrix
+impl<'a, 'b, T> Mul<&'b T> for &'a mut Matrix<T>
+    where T: Field + Scalar
+{
+    type Output = &'a mut Matrix<T>;
+
+    /// Add a scalar to the matrix
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use mathru::algebra::linear::Matrix;
+    ///
+    /// let a: Matrix<f64> = Matrix::new(2, 2, vec![1.0, 0.0, 3.0, -7.0]);
+    /// let b: Matrix<f64> = &a + &-4.0;
+    /// ```
+    fn mul(self: Self, rhs: &'b T) -> Self::Output
+    {
+        for i in 0..self.data.len()
+        {
+            self.data[i] *= *rhs;
+        }
+        //self.data.iter_mut().for_each(&|a: &mut T| *a *= *rhs );
+        //self.iter_mut().for_each(&|a: &mut T| *a *= *rhs );
+        return self
+    }
+}
+
+impl<'a, 'b, T> Mul<&'b Matrix<T>> for &'a Matrix<T>
+    where T: Field + Scalar
 {
     type Output = Matrix<T>;
 
@@ -155,10 +186,11 @@ impl<'a, 'b, T> Mul<&'b Matrix<T>> for &'a Matrix<T> where T: Field + Scalar
     }
 }
 
-impl<'a, 'b, T> Matrix<T> where T: Field + Scalar
+impl<'a, T> Matrix<T>
+    where T: Field + Scalar
 {
-    fn mul_scalar(self: Self, m: &'b T) -> Matrix<T>
+    fn mul_scalar(self: Self, m: &'a T) -> Matrix<T>
     {
-        self.apply_mut(&|&x| x * *m)
+        self.apply_mut(&|x| *x * *m)
     }
 }

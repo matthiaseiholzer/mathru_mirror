@@ -144,6 +144,12 @@ impl ImplicitODE<f64> for ImplicitODE1
         return result;
     }
 
+    fn jacobian(self: &Self, _t: f64, _input: &Vector<f64>) -> Matrix<f64>
+    {
+        let jacobian = matrix![-4.0];
+        return jacobian;
+    }
+
     fn time_span(self: &Self) -> (f64, f64)
     {
         return self.time_span;
@@ -152,11 +158,5 @@ impl ImplicitODE<f64> for ImplicitODE1
     fn init_cond(self: &Self) -> Vector<f64>
     {
         return self.init_cond.clone();
-    }
-
-    fn jacobian(self: &Self, _t: f64, _input: &Vector<f64>) -> Matrix<f64>
-    {
-        let jacobian = matrix![-4.0];
-        return jacobian;
     }
 }
