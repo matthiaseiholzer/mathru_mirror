@@ -45,8 +45,8 @@ impl<T> Mul<T> for Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 2.0, 3.0, 4.0]);
-    /// let res_ref: Vector<f64> = Vector::new_column(4, vec![-5.0, -10.0, -15.0, -20.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
+    /// let res_ref: Vector<f64> = Vector::new_column(vec![-5.0, -10.0, -15.0, -20.0]);
     ///
     /// assert_eq!(res_ref, a * -5.0)
     /// ```
@@ -68,8 +68,8 @@ impl<'a, T> Mul<&T> for &'a Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(4, vec![1.0, 2.0, 3.0, 4.0]);
-    /// let res_ref: Vector<f64> = Vector::new_column(4, vec![5.0, 10.0, 15.0, 20.0]);
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
+    /// let res_ref: Vector<f64> = Vector::new_column(vec![5.0, 10.0, 15.0, 20.0]);
     ///
     /// assert_eq!(res_ref, a * 5.0)
     /// ```

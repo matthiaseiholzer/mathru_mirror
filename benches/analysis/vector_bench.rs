@@ -5,9 +5,7 @@ use mathru::{algebra::linear::Vector, vector};
 use criterion::Criterion;
 use mathru::analysis::differential_equation::ordinary::{ExplicitEuler, ExplicitODE, FixedStepper};
 
-
-
-criterion_group!(euler, bench_vector_euler, bench_vec_euler);
+criterion_group!(euler, bench_vector_euler, bench_vec_euler, bench_lib);
 
 fn vec_dgl(state: &[f64]) -> Vec<f64> {
     vec![state[0]]

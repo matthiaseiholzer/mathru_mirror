@@ -1,19 +1,59 @@
-
 use mathru::algebra::linear::{Matrix, Vector};
 use mathru::algebra::abstr::Complex;
 use mathru::algebra::abstr::cast::FromPrimitive;
 
 #[test]
-fn mul_0()
+fn matrix_owner()
 {
-    let size: usize = 23;
+    let a: Matrix<f64> = matrix![   1.0, 2.0, 5.0;
+                                    3.0, 4.0, 6.0];
 
-    let zero: Matrix<f32> = Matrix::zero(size, size);
-    let one: Matrix<f32> = Matrix::one(size);
+    let b: Matrix<f64> = matrix![   5.0, 8.0;
+                                    6.0, 9.0;
+                                    7.0, 10.0];
 
-    let res: Matrix<f32> = zero * one;
+    let prod_ref: Matrix<f64> = matrix![   52.0, 76.0;
+                                            81.0, 120.0];
 
-    assert_relative_eq!(res, Matrix::zero(size, size));
+    let res: Matrix<f64> = a * b;
+
+    assert_relative_eq!(prod_ref, res);
+}
+
+#[test]
+fn matrix_borrow()
+{
+    let a: Matrix<f64> = matrix![   1.0, 2.0, 5.0;
+                                    3.0, 4.0, 6.0];
+
+    let b: Matrix<f64> = matrix![   5.0, 8.0;
+                                    6.0, 9.0;
+                                    7.0, 10.0];
+
+    let prod_ref: Matrix<f64> = matrix![   52.0, 76.0;
+                                            81.0, 120.0];
+
+    let res: Matrix<f64> = &a * &b;
+
+    assert_relative_eq!(prod_ref, res);
+}
+
+#[test]
+fn matrix_borrow_mut()
+{
+    let mut a: Matrix<f64> = matrix![   1.0, 2.0, 5.0;
+                                    3.0, 4.0, 6.0];
+
+    let b: Matrix<f64> = matrix![   5.0, 8.0;
+                                    6.0, 9.0;
+                                    7.0, 10.0];
+
+    let prod_ref: Matrix<f64> = matrix![   52.0, 76.0;
+                                            81.0, 120.0];
+
+    let _ = &mut a * &b;
+
+    assert_relative_eq!(prod_ref, a);
 }
 
 
@@ -64,7 +104,6 @@ fn mul_3()
     let res: Matrix<f64> = &a * &b;
 
     assert_relative_eq!(reference, res, epsilon=0.00001, max_relative=1.0e-10);
-
 }
 
 #[test]
@@ -116,7 +155,6 @@ fn mul_complex_f64()
 
     assert_relative_eq!(mul_ref, &a * &b);
 }
-
 
 #[test]
 fn mul_scalar_f32()
@@ -239,4 +277,40 @@ fn matrix_mul_vector_complex_f32()
                                                     Complex::from_f64(22.0)];
 
     assert_relative_eq!(prod_ref, m * v);
+}
+
+#[test]
+fn scalar_owner()
+{
+    let m: Matrix<f32> = matrix![   1.0, 2.0;
+                                    3.0, 4.0];
+
+    let prod_ref: Matrix<f32> = matrix![    -0.5, -1.0;
+                                            -1.5, -2.0];
+
+    assert_relative_eq!(prod_ref, m * -0.5);
+}
+
+#[test]
+fn scalar_borrow()
+{
+    let m: Matrix<f32> = matrix![   1.0, 2.0;
+                                    3.0, 4.0];
+
+    let prod_ref: Matrix<f32> = matrix![    -0.5, -1.0;
+                                            -1.5, -2.0];
+
+    assert_relative_eq!(prod_ref, &m * &-0.5);
+}
+
+#[test]
+fn scalar_borrow_mut()
+{
+    let mut m: Matrix<f32> = matrix![   1.0, 2.0;
+                                    3.0, 4.0];
+
+    let prod_ref: Matrix<f32> = matrix![    -0.5, -1.0;
+                                            -1.5, -2.0];
+
+    assert_relative_eq!(prod_ref, &mut m * &-0.5);
 }

@@ -71,51 +71,6 @@ fn partial_eq1()
     assert_relative_eq!(lhs, rhs);
 }
 
-
-#[test]
-fn scalar_sub_owner()
-{
-    let a: Vector<f32> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0, 5.0]);
-    let res_ref: Vector<f32> = Vector::new_column(vec![-4.0, -3.0, -2.0, -1.0, 0.0]);
-
-    let res: Vector<f32> = a - 5.0;
-
-    assert_relative_eq!(res, res_ref);
-}
-
-#[test]
-fn scalar_sub_borrow()
-{
-    let a: Vector<f32> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0, 5.0]);
-    let res_ref: Vector<f32> = Vector::new_column(vec![-4.0, -3.0, -2.0, -1.0, 0.0]);
-
-    let res: Vector<f32> = &a - &5.0;
-
-    assert_relative_eq!(res, res_ref);
-}
-
-#[test]
-fn scalar_mul_owner()
-{
-    let a: Vector<f32> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0, 5.0]);
-    let res_ref: Vector<f32> = Vector::new_column(vec![5.0, 10.0, 15.0, 20.0, 25.0]);
-
-    let res: Vector<f32> = a * 5.0;
-
-    assert_relative_eq!(res, res_ref);
-}
-
-#[test]
-fn scalar_mul_borrow()
-{
-    let a: Vector<f32> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0, -5.0]);
-    let res_ref: Vector<f32> = Vector::new_column(vec![-5.0, -10.0, -15.0, -20.0, 25.0]);
-
-    let res: Vector<f32> = &a * &-5.0;
-
-    assert_relative_eq!(res, res_ref);
-}
-
 #[test]
 fn scalar_div_owner()
 {
@@ -134,31 +89,6 @@ fn scalar_div_borrow()
     let res_ref: Vector<f32> = Vector::new_column(vec![-10.0, 5.0, -6.0, 2.0, 0.5]);
 
     let res: Vector<f32> = &a / &-2.0;
-
-    assert_relative_eq!(res, res_ref);
-}
-
-#[test]
-fn sub()
-{
-    let a: Vector<f32> = Vector::new_column( vec![1.0, 2.0, 3.0, 4.0, 5.0]);
-    let b: Vector<f32> = Vector::new_column(vec![1.0, 4.0, -1.0, 0.0, -7.0]);
-    let res_ref: Vector<f32> = Vector::new_column(vec![0.0, -2.0, 4.0, 4.0, 12.0]);
-
-    let res: Vector<f32> = a - b;
-
-    assert_relative_eq!(res, res_ref);
-
-}
-
-#[test]
-fn sub_ref()
-{
-    let a: Vector<f32> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0, 5.0]);
-    let b: Vector<f32> = Vector::new_column(vec![1.0, 4.0, -1.0, 0.0, -7.0]);
-    let res_ref: Vector<f32> = Vector::new_column(vec![0.0, -2.0, 4.0, 4.0, 12.0]);
-
-    let res: Vector<f32> = &a - &b;
 
     assert_relative_eq!(res, res_ref);
 }
@@ -203,18 +133,6 @@ fn set_slice_0()
     a.set_slice(&b, 2);
 
     assert_relative_eq!(res_ref, a);
-}
-
-#[test]
-fn transpose()
-{
-    let (m_ref, n_ref): (usize, usize) = (4, 1);
-    let vec: Vector<f32> = Vector::new_column(vec![2.0, 6.0, -2.5, 0.0]);
-    let vec_trans: Vector<f32> = vec.transpose();
-
-    let (m, n): (usize, usize) = vec_trans.dim();
-
-    assert_eq!((n_ref, m_ref), (m, n));
 }
 
 #[test]
@@ -274,29 +192,6 @@ fn p_norm()
     assert_relative_eq!(p_norm_ref, p_norm);
 }
 
-#[test]
-fn matrix_mul_owner()
-{
-    let m = matrix![1.0, 2.0; 3.0, 4.0];
-    let v = vector![1.0, 2.0];
-    let prod_ref = vector![7.0, 10.0];
-
-    let res = v * m;
-
-    assert_relative_eq!(prod_ref, res);
-}
-
-#[test]
-fn matrix_mul_borrow()
-{
-    let m: Matrix<f64> = matrix![1.0, 2.0; 3.0, 4.0];
-    let v: Vector<f64> = vector![1.0, 2.0];
-    let prod_ref: Vector<f64> = vector![7.0, 10.0];
-
-    let res = &v * &m;
-
-    assert_relative_eq!(prod_ref, res);
-}
 
 #[test]
 fn argmax()

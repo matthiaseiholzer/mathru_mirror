@@ -84,7 +84,7 @@ impl<'a, T> Mul<&T> for &'a Vector<T>
     /// let a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
     /// let res_ref: Vector<f64> = Vector::new_column(vec![5.0, 10.0, 15.0, 20.0]);
     ///
-    /// assert_eq!(res_ref, a * 5.0)
+    /// assert_eq!(res_ref, &a * &5.0)
     /// ```
     fn mul(self: Self, rhs: &T) -> Self::Output
     {
@@ -92,7 +92,7 @@ impl<'a, T> Mul<&T> for &'a Vector<T>
     }
 }
 
-impl<'a, T> Mul<&T> for &'a mut Vector<T>
+impl<'a, 'b, T> Mul<&'b T> for &'a mut Vector<T>
     where T: Field + Scalar
 {
     type Output = Self;
@@ -107,11 +107,11 @@ impl<'a, T> Mul<&T> for &'a mut Vector<T>
     /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
     /// let res_ref: Vector<f64> = Vector::new_column(vec![5.0, 10.0, 15.0, 20.0]);
     ///
-    /// assert_eq!(res_ref, *((&mut a) * &5.0))
+    /// assert_eq!(res_ref, *(&mut a * &5.0))
     /// ```
-    fn mul(self: Self, rhs: &T) -> Self::Output
+    fn mul(self: Self, rhs: &'b T) -> Self::Output
     {
-        (&mut self.data).mul(rhs);
+        let _ = &mut self.data * rhs;
         self
     }
 }

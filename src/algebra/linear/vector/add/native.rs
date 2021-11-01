@@ -2,7 +2,7 @@ use crate::algebra::{
     abstr::{Field, Scalar},
     linear::{Vector},
 };
-use std::ops::{Add, AddAssign};
+use std::ops::Add;
 
 impl<T> Add<Self> for Vector<T>
     where T: Field + Scalar
@@ -24,55 +24,7 @@ impl<T> Add<Self> for Vector<T>
     /// ```
     fn add(self: Self, rhs: Self) -> Self::Output
     {
-        (&self).add(&rhs)
-    }
-}
-
-impl<T> Add<T> for Vector<T>
-    where T: Field + Scalar
-{
-    type Output = Vector<T>;
-
-    /// Adds a scalar to the vector
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// use mathru::algebra::linear::Vector;
-    ///
-    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
-    /// let res_ref: Vector<f64> = Vector::new_column(vec![-4.0, -3.0, -2.0, -1.0]);
-    ///
-    /// assert_eq!(res_ref, a + -5.0)
-    /// ```
-    fn add(mut self: Self, rhs: T) -> Self::Output
-    {
-        (&mut self.data).add(&rhs);
-        return self;
-    }
-}
-
-impl<'a, 'b, T> Add<&'b T> for &'a mut Vector<T>
-    where T: Field + Scalar
-{
-    type Output = Self;
-
-    /// Adds a scalar to the vector
-    ///
-    /// # Example
-    ///
-    /// ```
-    /// use mathru::algebra::linear::Vector;
-    ///
-    /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
-    /// let res_ref: Vector<f64> = Vector::new_column(vec![-4.0, -3.0, -2.0, -1.0]);
-    ///
-    /// assert_eq!(res_ref, *(&mut a + &-5.0))
-    /// ```
-    fn add(self: Self, rhs: &'b T) -> Self::Output
-    {
-        (&mut self.data).add(rhs);
-        self
+        &self + &rhs
     }
 }
 
@@ -114,57 +66,88 @@ impl<'a, 'b, T> Add<&'b Vector<T>> for &'a mut Vector<T>
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
+    /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
     /// let b: Vector<f64> = Vector::new_column(vec![3.0, -4.0, 5.0, 4.0]);
     /// let res_ref: Vector<f64> = Vector::new_column(vec![4.0, -2.0, 8.0, 8.0]);
     ///
-    /// assert_eq!(res_ref, &a + &b)
+    /// assert_eq!(res_ref, *(&mut a + &b))
     /// ```
     fn add(self: Self, rhs: &'b Vector<T>) -> Self::Output
     {
-        (&self.data).add(&rhs.data);
+        let _ = &mut self.data + &rhs.data;
         return self
     }
 }
 
-
-// Add scalar to vector
-impl<T> AddAssign<Vector<T>> for Vector<T>
+impl<T> Add<T> for Vector<T>
     where T: Field + Scalar
 {
-    /// Add a scalar to the vector
+    type Output = Vector<T>;
+
+    /// Adds a scalar to the vector
     ///
     /// # Example
     ///
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, 0.0, 3.0, -7.0]);
-    /// let b: Vector<f64> = Vector::new_column(vec![2.0, 3.0, -5.0, 2.0]);
-    /// a += b;
+    /// let a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
+    /// let res_ref: Vector<f64> = Vector::new_column(vec![-4.0, -3.0, -2.0, -1.0]);
+    ///
+    /// assert_eq!(res_ref, a + -5.0)
     /// ```
-    fn add_assign(&mut self, rhs: Vector<T>)
+    fn add(mut self: Self, rhs: T) -> Self::Output
     {
-        self.data += rhs.data
+        let _ = &mut self.data + &rhs;
+        return self;
     }
 }
 
-// Add scalar to vector
-impl<T> AddAssign<T> for Vector<T>
+impl<'a, 'b, T> Add<&'b T> for &'a Vector<T>
     where T: Field + Scalar
 {
-    /// Add a scalar to the vector
+    type Output = Vector<T>;
+
+    /// Adds a scalar to the vector
     ///
     /// # Example
     ///
     /// ```
     /// use mathru::algebra::linear::Vector;
     ///
-    /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, 0.0, 3.0, -7.0]);
-    /// a += -4.0;
+    /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
+    /// let res_ref: Vector<f64> = Vector::new_column(vec![-4.0, -3.0, -2.0, -1.0]);
+    ///
+    /// assert_eq!(res_ref, &a + &-5.0)
     /// ```
-    fn add_assign(&mut self, rhs: T)
+    fn add(self: Self, rhs: &'b T) -> Self::Output
     {
-        self.data += rhs
+        let mut res: Vector<T> = self.clone();
+        let _ = &mut res + rhs;
+        res
+    }
+}
+
+impl<'a, 'b, T> Add<&'b T> for &'a mut Vector<T>
+    where T: Field + Scalar
+{
+    type Output = Self;
+
+    /// Adds a scalar to the vector
+    ///
+    /// # Example
+    ///
+    /// ```
+    /// use mathru::algebra::linear::Vector;
+    ///
+    /// let mut a: Vector<f64> = Vector::new_column(vec![1.0, 2.0, 3.0, 4.0]);
+    /// let res_ref: Vector<f64> = Vector::new_column(vec![-4.0, -3.0, -2.0, -1.0]);
+    ///
+    /// assert_eq!(res_ref, *(&mut a + &-5.0))
+    /// ```
+    fn add(self: Self, rhs: &'b T) -> Self::Output
+    {
+        let _ = &mut self.data + rhs;
+        self
     }
 }

@@ -242,7 +242,8 @@ impl<T> Vector<T> where T: Scalar
     }
 }
 
-impl<T> Vector<T> where T: Field + Scalar
+impl<T> Vector<T>
+    where T: Field + Scalar
 {
     /// Returns the transposed vector
     ///

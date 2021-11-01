@@ -1,5 +1,4 @@
 use mathru::{algebra::linear::Vector};
-use std::ops::Mul;
 use criterion::Criterion;
 
 criterion_group!(vector_mul, bench_vector_mul_scalar, bench_vec_mul_scalar);
@@ -14,7 +13,7 @@ fn bench_vector_mul_scalar(bench: &mut Criterion)
 fn vector_mul_scalar()
 {
     let mut vec: Vector<f64> = Vector::new_column(vec![3.0; 100000]);
-    let _: &mut Vector<f64> = (&mut vec).mul(&3.0f64);
+    let _: &mut Vector<f64> = &mut vec * &3.0f64;
 }
 
 fn bench_vec_mul_scalar(bench: &mut Criterion)
