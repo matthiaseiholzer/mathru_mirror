@@ -100,9 +100,9 @@ document.addEventListener(\"DOMContentLoaded\", function () {
 //!
 //! 	pub fn function(x: f64, beta: &Vector<f64>) -> f64
 //! 	{
-//! 		let beta_0: f64 = *beta.get(0);
-//! 		let beta_1: f64 = *beta.get(1);
-//! 		let beta_2: f64 = *beta.get(2);
+//! 		let beta_0: f64 = beta[0];
+//! 		let beta_1: f64 = beta[1];
+//! 		let beta_2: f64 = beta[2];
 //! 		let f_x: f64 = beta_0 + beta_1 * (beta_2 * x).exp();
 //!
 //! 		return f_x;
@@ -131,15 +131,14 @@ document.addEventListener(\"DOMContentLoaded\", function () {
 //!
 //! 		for i in 0..x_m
 //! 		{
-//! 			//let beta_0: f64 = *beta.get(0);
-//! 			let beta_1: f64 = *beta.get(1);
-//! 			let beta_2: f64 = *beta.get(2);
+//! 			let beta_1: f64 = beta[1];
+//! 			let beta_2: f64 = beta[2];
 //!
-//! 			let x_i: f64 = *self.x.get(i);
+//! 			let x_i: f64 = self.x[i];
 //!
-//! 			*jacobian_f.get_mut(i, 0) = 1.0;
-//! 			*jacobian_f.get_mut(i, 1) = (beta_2 * x_i).exp();
-//! 			*jacobian_f.get_mut(i, 2) = beta_1 * x_i * (beta_2 * x_i).exp();
+//! 			jacobian_f[[i, 0]] = 1.0;
+//! 			jacobian_f[[i, 1]] = (beta_2 * x_i).exp();
+//! 			jacobian_f[[i, 2]] = beta_1 * x_i * (beta_2 * x_i).exp();
 //!		    }
 //!
 //!    		let jacobian: Matrix<f64> = (residual.transpose() * jacobian_f * -2.0).into();

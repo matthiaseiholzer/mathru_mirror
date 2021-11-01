@@ -49,7 +49,7 @@ fn zeros()
     {
         for k in 0..cols
         {
-            assert_relative_eq!(*(m_zero.get(i, k)), 0.0);
+            assert_relative_eq!(m_zero[[i, k]], 0.0);
         }
     }
 }
@@ -68,11 +68,11 @@ fn one()
         {
             if i == k
             {
-                assert_relative_eq!(*m_ones.get(i, k), 1.0);
+                assert_relative_eq!(m_ones[[i, k]], 1.0);
             }
             else
             {
-                assert_relative_eq!(*m_ones.get(i, k), 0.0);
+                assert_relative_eq!(m_ones[[i, k]], 0.0);
             }
         }
     }
@@ -104,7 +104,7 @@ fn get_column()
 
     for i in 0..4
     {
-        assert_relative_eq!(*x.get(i), *x_ref.get(i));
+        assert_relative_eq!(x[i], x_ref[i]);
     }
 }
 
@@ -121,7 +121,7 @@ fn get_row()
 
     for i in 0..4
     {
-        assert_relative_eq!(*(x.get(i)), *(x_ref.get(i)));
+        assert_relative_eq!(x[i], x_ref[i]);
     }
 }
 
@@ -137,11 +137,11 @@ fn givens()
 
     let givens: Matrix<f32> = Matrix::givens(m, i, j, c, s);
 
-    assert_relative_eq!(*(givens.get(0, 0)), 1.0);
-    assert_relative_eq!(*(givens.get(i, i)), c);
-    assert_relative_eq!(*(givens.get(j, j)), c);
-    assert_relative_eq!(*(givens.get(j, i)), -s);
-    assert_relative_eq!(*(givens.get(i, j)), s);
+    assert_relative_eq!(givens[[0, 0]], 1.0);
+    assert_relative_eq!(givens[[i, i]], c);
+    assert_relative_eq!(givens[[j, j]], c);
+    assert_relative_eq!(givens[[j, i]], -s);
+    assert_relative_eq!(givens[[i, j]], s);
 }
 
 #[cfg(feature = "native")]

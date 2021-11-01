@@ -211,8 +211,8 @@ impl<T> ProportionalControl<T> where T: Real
 
         for i in 0..n
         {
-            let y_i: T = *y.get(i);
-            let y_hat_i: T = *y_hat.get(i);
+            let y_i: T = y[i];
+            let y_hat_i: T = y_hat[i];
             let sc_i: T = self.abs_tol + y_i.abs() * self.rel_tol;
 
             let k: T = (y_i - y_hat_i) / sc_i;

@@ -37,7 +37,7 @@ impl<'a, 'b, T> Mul<&'b Matrix<T>> for &'a Vector<T>
             let mut sum: T = T::zero();
             for k in 0..rhs_m
             {
-                sum = sum + *self.get(k) * *rhs.get(k, i);
+                sum += self[k] * rhs[[k, i]];
             }
             res.push(sum.clone());
         }

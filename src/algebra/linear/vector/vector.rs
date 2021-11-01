@@ -16,7 +16,7 @@ use std::{
     fmt,
     fmt::Display,
     iter::IntoIterator,
-    ops::{Neg, Mul},
+    ops::{Neg},
 };
 
 /// Macro to construct vectors
@@ -124,7 +124,7 @@ impl<T> Vector<T> where T: Field + Scalar + Power
         let mut sum: T = T::zero();
         for i in 0..(m * n)
         {
-            let b: T = *self.get(i);
+            let b: T = self[i];
             sum += b.pow(*p);
         }
         let norm: T = sum.pow(T::one() / *p);
@@ -291,9 +291,9 @@ impl<T> Vector<T>
         assert_eq!(lhs_n, rhs_n);
 
         let temp: Vector<T> = self.clone().transpose();
-        let res: Matrix<T> = (&temp.data).mul(&(rhs.data));
+        let res: Matrix<T> = &temp.data * &rhs.data;
 
-        return (*res.get(0, 0)).clone();
+        return res[[0, 0]].clone();
     }
 
     /// Find the argmax of the vector.
@@ -314,15 +314,15 @@ impl<T> Vector<T>
         let (m, n) = self.dim();
 
         let mut max_index: usize = 0;
-        let mut max = *self.get(max_index);
+        let mut max = self[max_index];
 
         let limit: usize = m.max(n);
 
-        assert!(limit != 0);
+        assert_ne!(limit, 0);
 
         for idx in 0..limit
         {
-            let element: T = *self.get(idx);
+            let element: T = self[idx];
             if element > max
             {
                 max_index = idx;
@@ -351,7 +351,7 @@ impl<T> Vector<T>
         let (m, n) = self.dim();
 
         let mut min_index: usize = 0;
-        let mut min: T = *self.get(min_index);
+        let mut min: T = self[min_index];
 
         let limit: usize = m.max(n);
 
@@ -359,7 +359,7 @@ impl<T> Vector<T>
 
         for idx in 0..limit
         {
-            let element: T = *self.get(idx);
+            let element: T = self[idx];
             if element < min
             {
                 min_index = idx;
@@ -396,7 +396,7 @@ impl<T> Vector<T>
         {
             for j in 0..y_m
             {
-                *c.get_mut(i, j) = self.get(i).clone() * rhs.get(j).clone();
+                c[[i, j]] = self[i].clone() * rhs[j].clone();
             }
         }
         c
@@ -413,9 +413,9 @@ impl<T> Vector<T>
 
         let norm_x: T = self.p_norm(&two);
 
-        *x_temp.get_mut(0) += self.get(0).sign() * norm_x;
+        x_temp[0] += self[0].sign() * norm_x;
         let x_temp_norm: T = x_temp.p_norm(&two);
-        *x_temp.get_mut(0) /= x_temp_norm;
+        x_temp[0] /= x_temp_norm;
 
         x_temp
     }
@@ -537,7 +537,7 @@ impl<T> Vector<T>
 
         for r in s..(e + 1)
         {
-            *slice.get_mut(r - s) = *self.get(r)
+            slice[r - s] = self[r].clone()
         }
 
         return slice;
@@ -572,7 +572,7 @@ impl<T> Vector<T>
 
         for r in s..(s + s_m)
         {
-            *self.get_mut(r) = *rhs.get(r - s);
+            self[r] = rhs[r - s];
         }
     }
 }

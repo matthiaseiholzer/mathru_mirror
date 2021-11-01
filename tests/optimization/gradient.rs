@@ -15,8 +15,8 @@ fn minimization_quadratic()
 
     let x_min: Vector<f64> = optim.minimize(&function, &x_0).arg();
 
-    assert_abs_diff_eq!(*x_min.get(0), 0.0f64, epsilon=0.05f64);
-    assert_abs_diff_eq!(*x_min.get(1), 0.0f64, epsilon=0.05f64);
+    assert_abs_diff_eq!(x_min[0], 0.0f64, epsilon=0.05f64);
+    assert_abs_diff_eq!(x_min[1], 0.0f64, epsilon=0.05f64);
 }
 
 #[test]

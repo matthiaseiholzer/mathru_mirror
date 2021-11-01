@@ -50,9 +50,9 @@ impl<T> Matrix<T>
         // check that all singular values are positive
         for l in 0..b_m
         {
-            if b.get(l, l) < &T::zero()
+            if b[[l, l]] < T::zero()
             {
-                *b.get_mut(l, l) = -*b.get(l, l);
+                b[[l, l]] = -b[[l, l]];
                 let mut column_l: Vector<T> = u.get_column(l);
                 column_l = &column_l * &-T::one();
                 u.set_column(&column_l, l);
@@ -66,7 +66,7 @@ impl<T> Matrix<T>
             {
                 if k != l
                 {
-                    *b.get_mut(k, l) = T::zero();
+                    b[[k, l]] = T::zero();
                 }
             }
         }
@@ -89,12 +89,12 @@ impl<T> Matrix<T>
             // Construct matrix Q and multiply on the right by Q'.
             // Q annihilates both B(k-1,k+1) and B(k,k+1)
             // but makes B(k+1,k) non-zero.
-            let (c_r, s_r, _r_r): (T, T, T) = Matrix::rot(*b.get(k, k), *b.get(k, k + 1));
+            let (c_r, s_r, _r_r): (T, T, T) = Matrix::rot(b[[k, k]], b[[k, k + 1]]);
 
-            *q.get_mut(k, k) = c_r;
-            *q.get_mut(k, k + 1) = s_r;
-            *q.get_mut(k + 1, k) = -s_r;
-            *q.get_mut(k + 1, k + 1) = c_r;
+            q[[k, k]] = c_r;
+            q[[k, k + 1]] = s_r;
+            q[[k + 1, k]] = -s_r;
+            q[[k + 1, k + 1]] = c_r;
 
             let q_t: Matrix<T> = q.clone().transpose();
             b = &b * &q_t;
@@ -104,12 +104,12 @@ impl<T> Matrix<T>
             // Construct matrix Q and multiply on the left by Q.
             // Q annihilates B(k+1,k) but makes B(k,k+1) and
             // B(k,k+2) non-zero.
-            let (c_l, s_l, _r_l): (T, T, T) = Matrix::rot(*b.get(k, k), *b.get(k + 1, k));
+            let (c_l, s_l, _r_l): (T, T, T) = Matrix::rot(b[[k, k]], b[[k + 1, k]]);
 
-            *q.get_mut(k, k) = c_l;
-            *q.get_mut(k, k + 1) = s_l;
-            *q.get_mut(k + 1, k) = -s_l;
-            *q.get_mut(k + 1, k + 1) = c_l;
+            q[[k, k]] = c_l;
+            q[[k, k + 1]] = s_l;
+            q[[k + 1, k]] = -s_l;
+            q[[k + 1, k + 1]] = c_l;
 
             b = &q * &b;
             u = &q * &u;
@@ -208,7 +208,7 @@ impl<T> Matrix<T>
             {
                 if k != i && k != (i + 1)
                 {
-                    *a_i.get_mut(i, k) = T::zero();
+                    a_i[[i, k]] = T::zero();
                 }
             }
         }

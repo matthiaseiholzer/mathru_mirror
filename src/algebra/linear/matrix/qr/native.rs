@@ -41,8 +41,8 @@ impl<T> Matrix<T>
         {
             for i in (j + 1..self.m).rev()
             {
-                let a_jj: T = *r.get(j, j);
-                let a_ij: T = *r.get(i, j);
+                let a_jj: T = r[[j, j]];
+                let a_ij: T = r[[i, j]];
 
                 let p: T = (a_jj * a_jj + a_ij * a_ij).sqrt();
 

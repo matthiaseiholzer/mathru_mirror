@@ -59,9 +59,9 @@ impl<'a, 'b, T> Mul<&'b Matrix<T>> for &'a Matrix<T>
                 let mut sum: T = T::zero();
                 for k in 0..l_cols
                 {
-                    sum += *self.get(i, k) * *rhs.get(k, j);
+                    sum += self[[i, k]] * rhs[[k, j]];
                 }
-                *prod.get_mut(i, j) = sum;
+                prod[[i, j]] = sum;
             }
         }
         return prod;
@@ -101,9 +101,9 @@ impl<'a, 'b, T> Mul<&'b Matrix<T>> for &'a mut Matrix<T>
                 let mut sum: T = T::zero();
                 for k in 0..l_cols
                 {
-                    sum += *self.get(i, k) * *rhs.get(k, j);
+                    sum += self[[i, k]] * rhs[[k, j]];
                 }
-                *prod.get_mut(i, j) = sum;
+                prod[[i, j]] = sum;
             }
         }
         println!("prod: {:?}", prod.clone());
@@ -149,7 +149,7 @@ impl<'a, 'b, T> Mul<&'b Vector<T>> for &'a Matrix<T>
             let mut row_column_product: T = T::zero();
             for k in 0..self.n
             {
-                row_column_product += self.data[k * self.m + i] * *v.get(k);
+                row_column_product += self.data[k * self.m + i] * v[k];
             }
             prod_data.push(row_column_product);
         }

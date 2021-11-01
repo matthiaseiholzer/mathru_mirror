@@ -26,7 +26,7 @@ fn fn1()
     let init_cond: Vector<f64> = problem.init_cond();
 
     assert_relative_eq!(time_span.1, t[len - 1], epsilon=0.001);
-    assert_relative_eq!(*init_cond.get(0) * (2.0 * time_span.1).exp(), *y[len - 1].get(0), epsilon=0.1);
+    assert_relative_eq!(init_cond[0] * (2.0 * time_span.1).exp(), y[len - 1][0], epsilon=0.1);
 }
 
 #[test]
@@ -50,5 +50,5 @@ fn fn2()
     let time_span: (f64, f64) = problem.time_span();
 
     assert_relative_eq!(time_span.1, t[len - 1], epsilon=0.0001);
-    assert_relative_eq!(time_span.1.tan(), *y[len - 1].get(0), epsilon=0.008);
+    assert_relative_eq!(time_span.1.tan(), y[len - 1][0], epsilon=0.008);
 }

@@ -38,9 +38,9 @@ impl Sqrt
     {
         let newton: NewtonRaphson<f64> = NewtonRaphson::default();
 
-        let sqrt: Sqrt = Sqrt{y: y};
+        let sqrt: Sqrt = Sqrt{y};
 
-        let x: f64 = *newton.find_root(&sqrt, &vector![y]).unwrap().get(0);
+        let x: f64 = newton.find_root(&sqrt, &vector![y]).unwrap()[0];
         return x;
     }
 }

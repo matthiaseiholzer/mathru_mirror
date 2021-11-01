@@ -25,7 +25,7 @@ impl Function<Vector<f64>> for Func1
 
 	fn eval(self: &Self, input: &Vector<f64>) -> Vector<f64>
 	{
-		let x: f64 = *input.get(0);
+		let x: f64 = input[0];
 		return 	vector![x * x - 2.0];
 	}
 }
@@ -34,7 +34,7 @@ impl Jacobian<f64> for Func1
 {
 	fn jacobian(self: &Self, input: &Vector<f64>) -> Matrix<f64>
 	{
-		let x: f64 = *input.get(0);
+		let x: f64 = input[0];
 
 		return matrix![2.0 * x];
 	}

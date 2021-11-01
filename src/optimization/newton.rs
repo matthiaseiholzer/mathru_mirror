@@ -110,14 +110,14 @@ impl<T> Newton<T> where T: Real
             //Backtracking line search
             //Armijo–Goldstein condition
             let mut r: Vector<T> = &x_n + &(&d_k * &alpha);
-            let mut f_r: T = *func.eval(&r).get(0);
-            let f_x_n: T = *func.eval(&x_n).get(0);
+            let mut f_r: T = func.eval(&r)[0];
+            let f_x_n: T = func.eval(&x_n)[0];
             let temp: T = grad_x_n.dotp(&d_k);
             while f_r > f_x_n + temp * (self.sigma * alpha)
             {
                 alpha = alpha / T::from_f64(2.0);
                 r = &x_n + &(&d_k * &alpha);
-                f_r = *func.eval(&r).get(0);
+                f_r = func.eval(&r)[0];
             }
 
             //Make step

@@ -19,7 +19,7 @@ fn fn1_1_step()
     let init_cond: Vector<f64> = problem.init_cond();
 
     assert_relative_eq!(time_span.1, t[len - 1], epsilon=0.000000001);
-    assert_relative_eq!(*init_cond.get(0) * (2.0 * time_span.1).exp(), *y[len - 1].get(0), epsilon=0.2);
+    assert_relative_eq!(init_cond[0] * (2.0 * time_span.1).exp(), y[len - 1][0], epsilon=0.2);
 }
 
 #[test]
@@ -36,7 +36,7 @@ fn fn1_2_steps()
     let init_cond: Vector<f64> = problem.init_cond();
 
     assert_relative_eq!(time_span.1, t[len - 1], epsilon=0.000000001);
-    assert_relative_eq!(*init_cond.get(0) * (2.0 * time_span.1).exp(), *y[len - 1].get(0), epsilon=0.0003);
+    assert_relative_eq!(init_cond[0] * (2.0 * time_span.1).exp(), y[len - 1][0], epsilon=0.0003);
 }
 
 #[test]
@@ -53,7 +53,7 @@ fn fn1_3_steps()
     let init_cond: Vector<f64> = problem.init_cond();
 
     assert_relative_eq!(time_span.1, t[len - 1], epsilon=0.000000001);
-    assert_relative_eq!(*init_cond.get(0) * (2.0 * time_span.1).exp(), *y[len - 1].get(0), epsilon=0.00006);
+    assert_relative_eq!(init_cond[0] * (2.0 * time_span.1).exp(), y[len - 1][0], epsilon=0.00006);
 }
 
 #[test]
@@ -70,8 +70,8 @@ fn fn1_4_steps()
     let init_cond: Vector<f64> = problem.init_cond();
 
     assert_relative_eq!(time_span.1, t[len - 1], epsilon=0.000000001);
-    assert_relative_eq!(*init_cond.get(0) * (2.0 * time_span.1).exp(),
-                            *y[len - 1].get(0),
+    assert_relative_eq!(init_cond[0] * (2.0 * time_span.1).exp(),
+                            y[len - 1][0],
                             epsilon=0.000055);
 }
 
@@ -89,7 +89,7 @@ fn fn1_5_steps()
     let init_cond: Vector<f64> = problem.init_cond();
 
     assert_relative_eq!(time_span.1, t[len - 1], epsilon=0.000000001);
-    assert_relative_eq!(*init_cond.get(0) * (2.0 * time_span.1).exp(), *y[len - 1].get(0), epsilon=0.000055);
+    assert_relative_eq!(init_cond[0] * (2.0 * time_span.1).exp(), y[len - 1][0], epsilon=0.000055);
 }
 
 //	#[test]
@@ -105,7 +105,7 @@ fn fn1_5_steps()
 //		let time_span: (f64, f64) = problem.time_span();
 //
 //		assert_relative_eq!(time_span.1, t[len - 1], 0.000000001));
-//		assert_relative_eq!(1.0 / (2.0 - 1.8) - *y[len -1].get(0), 1.89756,
+//		assert_relative_eq!(1.0 / (2.0 - 1.8) - *y[len -1][0), 1.89756,
 // 0.00006)); 	}
 
 #[test]
@@ -121,5 +121,5 @@ fn fn2_1_step()
     let time_span: (f64, f64) = problem.time_span();
 
     assert_relative_eq!(time_span.1, t[len - 1], epsilon=0.00000001);
-    assert_relative_eq!(time_span.1.tan(), *y[len - 1].get(0), epsilon=0.07);
+    assert_relative_eq!(time_span.1.tan(), y[len - 1][0], epsilon=0.07);
 }

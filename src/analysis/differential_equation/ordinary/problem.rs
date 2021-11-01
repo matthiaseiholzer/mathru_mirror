@@ -40,8 +40,8 @@ impl<T> ExplicitODE<T> for Euler<T> where T: Real
 {
     fn func(self: &Self, x: &T, y: &Vector<T>) -> Vector<T>
     {
-        let y_1s: T = ((self.i2 - self.i3) / self.i1) * (*y.get(1) * *y.get(2));
-        let y_2s: T = ((self.i3 - self.i1) / self.i2) * (*y.get(2) * *y.get(0));
+        let y_1s: T = ((self.i2 - self.i3) / self.i1) * (y[1] * y[2]);
+        let y_2s: T = ((self.i3 - self.i1) / self.i2) * (y[2] * y[0]);
 
         let f: T;
         if *x >= T::from_f64(3.0) * T::pi() && *x <= T::from_f64(4.0) * T::pi()
@@ -52,7 +52,7 @@ impl<T> ExplicitODE<T> for Euler<T> where T: Real
         {
             f = T::zero();
         }
-        let y_3s: T = ((self.i1 - self.i2) / self.i3) * (*y.get(0) * *y.get(1)) + f;
+        let y_3s: T = ((self.i1 - self.i2) / self.i3) * (y[0] * y[1]) + f;
         return vector![y_1s; y_2s; y_3s];
     }
 
@@ -75,8 +75,8 @@ impl<T> ImplicitODE<T> for Euler<T> where T: Real
         let b: T = (self.i3 - self.i1) / self.i2;
         let c: T = (self.i1 - self.i2) / self.i3;
 
-        let y_1s: T = a * (*y.get(1) * *y.get(2));
-        let y_2s: T = b * (*y.get(2) * *y.get(0));
+        let y_1s: T = a * (y[1] * y[2]);
+        let y_2s: T = b * (y[2] * y[0]);
 
         let f: T;
         if x >= T::from_f64(3.0) * T::pi() && x <= T::from_f64(4.0) * T::pi()
@@ -87,7 +87,7 @@ impl<T> ImplicitODE<T> for Euler<T> where T: Real
         {
             f = T::zero();
         }
-        let y_3s: T = c * (*y.get(0) * *y.get(1)) + f;
+        let y_3s: T = c * (y[0] * y[1]) + f;
         return vector![y_1s; y_2s; y_3s];
     }
 
@@ -97,9 +97,9 @@ impl<T> ImplicitODE<T> for Euler<T> where T: Real
         let b: T = (self.i3 - self.i1) / self.i2;
         let c: T = (self.i1 - self.i2) / self.i3;
 
-        return matrix![ T::zero(), a * *y.get(2), a * *y.get(1);
-                        b * *y.get(2), T::zero(), b * *y.get(0);
-                        c * *y.get(1), c * *y.get(0), T::zero()];
+        return matrix![ T::zero(), a * y[2], a * y[1];
+                        b * y[2], T::zero(), b * y[0];
+                        c * y[1], c * y[0], T::zero()];
     }
 
     fn time_span(self: &Self) -> (T, T)
@@ -148,15 +148,15 @@ impl<T> ImplicitODE<T> for VanDerPolOsc<T> where T: Real
 {
     fn func(self: &Self, _t: T, x: &Vector<T>) -> Vector<T>
     {
-        let x_1 = *x.get(0);
-        let x_2 = *x.get(1);
+        let x_1 = x[0];
+        let x_2 = x[1];
         return vector![x_2; self.epsilon * (T::one() - (x_1 * x_1)) * x_2 - x_1];
     }
 
     fn jacobian(self: &Self, _t: T, x: &Vector<T>) -> Matrix<T>
     {
-        let x_1 = *x.get(0);
-        let x_2 = *x.get(1);
+        let x_1 = x[0];
+        let x_2 = x[1];
         return matrix![T::zero(), T::one(); -T::from_f64(2.0) * self.epsilon * x_1 * x_2  - T::one(), (T::one() - x_1 *
 		x_1) * self.epsilon];
     }

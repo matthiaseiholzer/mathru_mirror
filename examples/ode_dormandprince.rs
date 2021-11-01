@@ -33,9 +33,9 @@ fn main()
     for i in 0..x.len()
     {
         let x_i = x[i];
-        graph_x1.push((x_i, *y[i].get(0)));
-        graph_x2.push((x_i, *y[i].get(1)));
-        graph_x3.push((x_i, *y[i].get(2)));
+        graph_x1.push((x_i, y[i][0]));
+        graph_x2.push((x_i, y[i][1]));
+        graph_x3.push((x_i, y[i][2]));
     }
 
     let root_area =

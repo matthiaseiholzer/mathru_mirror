@@ -52,16 +52,16 @@ impl<T> Matrix<T>
                 let mut sum = T::zero();
                 for k in 0..j
                 {
-                    sum += *l.get(i, k) * *l.get(j, k);
+                    sum += l[[i, k]] * l[[j, k]];
                 }
 
                 if i == j
                 {
-                    *l.get_mut(i, j) = (*self.get(i, i) - sum).sqrt();
+                    l[[i, j]] = (self[[i, i]] - sum).sqrt();
                 }
                 else
                 {
-                    *l.get_mut(i, j) = (*self.get(i, j) - sum) / *l.get(j, j);
+                    l[[i, j]]= (self[[i, j]] - sum) / l[[j, j]];
                 }
             }
         }
@@ -114,16 +114,16 @@ impl<T> Matrix<Complex<T>>
                 let mut sum = Complex::<T>::zero();
                 for k in 0..j
                 {
-                    sum += *l.get(i, k) * l.get(j, k).conj();
+                    sum += l[[i, k]] * l[[j, k]].conj();
                 }
 
                 if i == j
                 {
-                    *l.get_mut(i, j) = (*self.get(i, i) - sum).sqrt();
+                    l[[i, j]] = (self[[i, i]] - sum).sqrt();
                 }
                 else
                 {
-                    *l.get_mut(i, j) = (*self.get(i, j) - sum) / *l.get(j, j);
+                    l[[i, j]] = (self[[i, j]] - sum) / l[[j, j]];
                 }
             }
         }

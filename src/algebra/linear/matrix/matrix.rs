@@ -196,7 +196,7 @@ impl<T> Matrix<T>
         let mut sum: T = T::zero();
         for i in 0..m
         {
-            sum += *self.get(i, i);
+            sum += self[[i, i]];
         }
 
         return sum;
@@ -210,9 +210,9 @@ impl<T> Matrix<T> where T: Scalar
     {
         for k in 0..self.n
         {
-            let temp: T = *self.get(i, k);
-            *(self.get_mut(i, k)) = *self.get(j, k);
-            *(self.get_mut(j, k)) = temp;
+            let temp: T = self[[i, k]];
+            self[[i, k]] = self[[j, k]];
+            self[[j, k]] = temp;
         }
     }
 }
@@ -228,7 +228,7 @@ impl<T> Matrix<T> where T: Field + Scalar
 
         for k in 0..self.m
         {
-            *(v.get_mut(k)) = *(self.get(k, i));
+            v[k] = self[[k, i]];
         }
 
         v
@@ -246,7 +246,7 @@ impl<T> Matrix<T> where T: Field + Scalar
 
         for k in 0..self.n
         {
-            *(v.get_mut(k)) = *(self.get(i, k));
+            v[k] = self[[i, k]];
         }
 
         v
@@ -263,7 +263,7 @@ impl<T> Matrix<T> where T: Field + Scalar
 
         for k in 0..self.m
         {
-            *(self.get_mut(k, i)) = *column.get(k);
+            self[[k, i]] = column[k];
         }
     }
 
@@ -284,7 +284,7 @@ impl<T> Matrix<T> where T: Field + Scalar
 
         for k in 0..self.n
         {
-            *(self.get_mut(i, k)) = *row.get(k);
+            self[[i, k]] = row[k];
         }
     }
 }
@@ -300,10 +300,10 @@ impl<T> Matrix<T> where T: Field + Scalar + Power
         }
 
         let mut givens: Matrix<T> = Matrix::one(m);
-        *(givens.get_mut(i, i)) = c;
-        *(givens.get_mut(j, j)) = c;
-        *(givens.get_mut(i, j)) = s;
-        *(givens.get_mut(j, i)) = -s;
+        givens[[i, i]] = c;
+        givens[[j, j]] = c;
+        givens[[i, j]] = s;
+        givens[[j, i]] = -s;
         givens
     }
 
@@ -381,7 +381,7 @@ impl<T> Matrix<T> where T: Field + Scalar + Power
 
         let alpha: T;
 
-        let d_0: T = *d.get(0);
+        let d_0: T = d[0];
 
         if d_0 >= T::zero()
         {
@@ -403,8 +403,8 @@ impl<T> Matrix<T> where T: Field + Scalar + Power
 
         let mut v: Vector<T> = Vector::zero(d_m);
 
-        *v.get_mut(0) = (T::from_f64(0.5) * (T::one() - d_0 / alpha)).pow(T::from_f64(0.5));
-        let p: T = -alpha * *v.get(0);
+        v[0] = (T::from_f64(0.5) * (T::one() - d_0 / alpha)).pow(T::from_f64(0.5));
+        let p: T = -alpha * v[0];
 
         if d_m - 1 >= 1
         {
@@ -426,7 +426,8 @@ impl<T> Matrix<T> where T: Field + Scalar + Power
     }
 }
 
-impl<T> Matrix<T> where T: Field + Scalar
+impl<T> Matrix<T>
+    where T: Field + Scalar
 {
     /// Returns a slice of the matrix
     ///
@@ -477,7 +478,7 @@ impl<T> Matrix<T> where T: Field + Scalar
         {
             for c in column_s..(column_e + 1)
             {
-                *slice.get_mut(r - row_s, c - column_s) = *self.get(r, c)
+                slice[[r - row_s, c - column_s]] = self[[r, c]];
             }
         }
         return slice;
@@ -522,7 +523,7 @@ impl<T> Matrix<T> where T: Field + Scalar
         {
             for c in column..(column + s_n)
             {
-                *self.get_mut(r, c) = *slice.get(r - row, c - column);
+                self[[r, c]] = slice[[r - row, c - column]];
             }
         }
         self
@@ -539,7 +540,7 @@ impl<T> Display for Matrix<T>
         {
             for j in 0..self.n
             {
-                write!(f, "{} ", self.get(i, j)).unwrap();
+                write!(f, "{} ", self[[i, j]]).unwrap();
             }
             write!(f, "\n").unwrap();
         }
@@ -549,7 +550,8 @@ impl<T> Display for Matrix<T>
 
 
 
-impl<T> PartialEq for Matrix<T> where T: PartialEq
+impl<T> PartialEq for Matrix<T>
+    where T: PartialEq
 {
     /// Checks if two matrices are equal
     ///
@@ -579,7 +581,8 @@ impl<T> PartialEq for Matrix<T> where T: PartialEq
     }
 }
 
-impl<T> Matrix<T> where T: Clone + Copy
+impl<T> Matrix<T>
+    where T: Clone + Copy
 {
     /// Creates a new Matrix object
     ///
@@ -605,7 +608,8 @@ impl<T> Matrix<T>
     }
 }
 
-impl<T> Matrix<T> where T: Scalar + Clone + Copy
+impl<T> Matrix<T>
+    where T: Scalar + Clone + Copy
 {
     pub fn new_random(m: usize, n: usize) -> Matrix<T>
     {
@@ -615,7 +619,8 @@ impl<T> Matrix<T> where T: Scalar + Clone + Copy
     }
 }
 
-impl<T> Matrix<T> where T: Field + Scalar
+impl<T> Matrix<T>
+    where T: Field + Scalar
 {
     /// Returns the zero matrix(additive neutral element)
     ///
@@ -635,7 +640,8 @@ impl<T> Matrix<T> where T: Field + Scalar
     }
 }
 
-impl<T> Identity<Addition> for Matrix<T> where T: Identity<Addition>
+impl<T> Identity<Addition> for Matrix<T>
+    where T: Identity<Addition>
 {
     /// Returns the additive neutral element)
     ///
@@ -657,7 +663,8 @@ impl<T> Identity<Addition> for Matrix<T> where T: Identity<Addition>
     }
 }
 
-impl<T> Matrix<T> where T: Field + Scalar
+impl<T> Matrix<T>
+    where T: Field + Scalar
 {
     /// Returns the eye matrix(multiplicative neutral element)
     ///
@@ -691,7 +698,8 @@ impl<T> Matrix<T> where T: Field + Scalar
     }
 }
 
-impl<T> Matrix<T> where T: Field + Scalar + Power + AbsDiffEq
+impl<T> Matrix<T>
+    where T: Field + Scalar + Power + AbsDiffEq
 {
     /// Calculates the pseudo inverse matrix
     ///

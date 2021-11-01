@@ -41,7 +41,7 @@ impl<T> Matrix<T> where
 
             for l in i ..a.m
             {
-                let p_cand: T =  a.get(l, i).abs();
+                let p_cand: T =  a[[l, i]].abs();
                 if p_cand > max
                 {
                     max = p_cand;
@@ -57,20 +57,20 @@ impl<T> Matrix<T> where
 
             for j in (i + 1)..a.n
             {
-                let f: T = if a.get(i, i).clone() != T::zero()
+                let f: T = if a[[i, i]].clone() != T::zero()
                 {
-                    *(a.get(j, i)) / *a.get(i, i)
+                    a[[j, i]] / a[[i, i]]
                 }
                 else
                 {
-                    *(a.get(j, i))
+                    a[[j, i]]
                 };
 
                 for k in (i + 1)..a.n
                 {
-                    *(a.get_mut(j, k)) = *a.get(j, k) - f * *a.get(i, k);
+                    a[[j, k]] = a[[j, k]] - f * a[[i, k]];
                 }
-                *(a.get_mut(j, i)) = f;
+                a[[j, i]] = f;
             }
         }
 

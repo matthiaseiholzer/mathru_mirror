@@ -51,7 +51,7 @@ fn zero()
 
     for i in 0..rows
     {
-        assert_relative_eq!(*(m_zero.get(i)), 0.0);
+        assert_relative_eq!(m_zero[i], 0.0);
     }
 }
 

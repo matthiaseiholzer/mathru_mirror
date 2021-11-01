@@ -22,15 +22,15 @@ impl<T> Matrix<T>
 
         if self.m == 1
         {
-            return *self.get(0, 0);
+            return self[[0, 0]];
         }
 
         if self.m == 2
         {
-            let a_11: T = *self.get(0, 0);
-            let a_12: T = *self.get(0, 1);
-            let a_21: T = *self.get(1, 0);
-            let a_22: T = *self.get(1, 1);
+            let a_11: T = self[[0, 0]];
+            let a_12: T = self[[0, 1]];
+            let a_21: T = self[[1, 0]];
+            let a_22: T = self[[1, 1]];
             return a_11 * a_22 - a_12 * a_21;
         }
 
@@ -44,13 +44,13 @@ impl<T> Matrix<T>
 
         for i in 0..self.m
         {
-            det *= *u.get(i, i);
+            det *= u[[i, i]];
         }
 
         let mut counter: usize = 0;
         for i in 0..self.m
         {
-            if *p.get(i, i) != T::one()
+            if p[[i, i]] != T::one()
             {
                 counter += 1;
             }

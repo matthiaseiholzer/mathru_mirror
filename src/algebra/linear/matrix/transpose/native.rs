@@ -84,12 +84,12 @@ impl<T> Transpose for Matrix<T>
             {
                 for i in 0..self.m
                 {
-                    temp[i] = *self.get(self.gather(i, j, b), j)
+                    temp[i] = self[[self.gather(i, j, b), j]]
                 }
 
                 for i in 0..self.m
                 {
-                    *self.get_mut(i, j) = temp[i];
+                    self[[i, j]] = temp[i];
                 }
             }
         }
@@ -98,12 +98,12 @@ impl<T> Transpose for Matrix<T>
         {
             for j in 0..self.n
             {
-                temp[self.scatter_da(i, j, b)] = *self.get(i, j);
+                temp[self.scatter_da(i, j, b)] = self[[i, j]];
             }
 
             for j in 0..self.n
             {
-                *self.get_mut(i, j) = temp[j];
+                self[[i, j]] = temp[j];
             }
         }
 
@@ -111,12 +111,12 @@ impl<T> Transpose for Matrix<T>
         {
             for i in 0..self.m
             {
-                temp[i] = *self.get(self.gather_sa(i, j, a), j);
+                temp[i] = self[[self.gather_sa(i, j, a), j]];
             }
 
             for i in 0..self.m
             {
-                *self.get_mut(i, j) = temp[i];
+                self[[i, j]] = temp[i];
             }
         }
 
