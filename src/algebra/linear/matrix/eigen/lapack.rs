@@ -30,7 +30,7 @@ impl<T> Matrix<T> where T: Field + Scalar + Power
         assert_eq!(m, n, "Unable to compute the eigen value of a non-square matrix");
         assert_ne!(m, 0, "Unable to compute the eigen value of an empty matrix.");
 
-        let (m, n): (usize, usize) = self.dim();
+        let (_, n): (usize, usize) = self.dim();
 
         let mut self_data: Vec<T> = self.clone().transpose().data;
         let n_i32: i32 = n as i32;
@@ -74,6 +74,6 @@ impl<T> Matrix<T> where T: Field + Scalar + Power
             return Err(())
         }
 
-        return Ok(EigenDec::new(Vector::new_column(m, w), Matrix::new(n, n, temp2)));
+        return Ok(EigenDec::new(Vector::new_column( w), Matrix::new(n, n, temp2)));
     }
 }

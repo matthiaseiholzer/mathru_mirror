@@ -72,7 +72,7 @@ impl<T> Matrix<T>
             return Err(());
         }
 
-        return Ok(Vector::new_column(y_m, y_data));
+        return Ok(Vector::new_column(y_data));
     }
 }
 

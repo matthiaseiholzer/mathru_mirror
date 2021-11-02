@@ -61,7 +61,7 @@ impl<T> Matrix<T>
         {
             for j in (i + 1)..n
             {
-                *l.get_mut(i, j) = T::zero();
+                l[[i, j]] = T::zero();
             }
         }
 
